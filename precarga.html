@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PRECARGA - JAAUKANIGAS</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:#edf2f7;
+    color:#111827;
+}
+/* ================= HEADER ================= */
+
+.header{
+
+    height:120px;
+
+    background-image:url('white.png');
+
+    background-size:cover;
+    background-position:center;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+/* CAPA OSCURA */
+
+.header-overlay{
+
+    width:100%;
+    height:100%;
+
+    background:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:10px;
+
+}
+
+/* FILA */
+
+.header-row{
+
+    width:100%;
+padding:0 70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:14px;
+
+}
+
+/* LOGO CONCURSO */
+
+.logo-vari{
+
+    width:85px;
+    height:85px;
+    object-fit:contain;
+
+    flex-shrink:0;
+
+}
+
+/* TEXTOS */
+
+.header-titles{
+
+    flex:1;
+
+    display:flex;
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+}
+
+/* TITULO PRECARGA*/
+
+.titulo-pre{
+
+    color:black;
+
+    font-size:28px;
+    font-weight:800;
+
+    text-shadow:0 2px 5px rgba(0,0,0,0.5);
+
+    line-height:1.1;
+
+}
+
+/* TITULO */
+
+.titulo-1{
+
+    color:black;
+
+    font-size:22px;
+    font-weight:800;
+
+    text-shadow:0 2px 5px rgba(0,0,0,0.5);
+
+    line-height:1.1;
+
+}
+
+/* SUBTITULO */
+
+.titulo-2{
+
+    color:#a3e635;
+
+    font-size:32px;
+    font-weight:900;
+
+    letter-spacing:1px;
+
+    text-shadow:0 2px 5px rgba(0,0,0,0.5);
+
+    line-height:1;
+
+}
+
+/* LOGO MACLA */
+
+.logo-macla{
+
+    width:105px;
+
+    object-fit:contain;
+
+    flex-shrink:0;
+
+}
+
+/* ================= MACLA BOX ================= */
+
+.macla-box{
+
+    display:flex;
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:2px;
+
+}
+
+/* TEXTO */
+
+.macla-text{
+
+    color:grey;
+
+    font-size:10px;
+    font-weight:700;
+
+    text-shadow:0 2px 5px rgba(0,0,0,0.5);
+
+    letter-spacing:0.5px;
+
+}
+
+/* ================= TABS ================= */
+
+.tabs{
+
+    display:grid;
+    grid-template-columns:1fr 1fr 90px 90px;
+    gap:6px;
+    padding:6px 8px 2px 8px;
+
+}
+
+.tab{
+
+    flex:1;
+    border:none;
+    border-radius:10px;
+    background:white;
+    height:30px;
+    font-size:12px;
+    font-weight:700;
+    cursor:pointer;
+
+}
+
+.tab.active{
+
+    background:#15803d;
+    color:white;
+
+}
+
+/* ================= CONTAINER ================= */
+
+.container{
+
+    padding:4px 8px;
+
+}
+
+.panel{
+
+    display:none;
+
+}
+
+.panel.active{
+
+    display:block;
+
+}
+
+/* ================= CARD ================= */
+
+.card{
+
+    background:white;
+    border-radius:16px;
+    padding:10px;
+    margin-bottom:6px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.05);
+
+}
+
+.card-title{
+
+    font-size:15px;
+    font-weight:800;
+    margin-bottom:10px;
+    color:#111827;
+
+}
+
+/* ================= FORM ================= */
+
+.form-grid{
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+
+}
+
+.full{
+
+    grid-column:1 / -1;
+
+}
+
+input,
+select{
+
+    width:100%;
+    height:30px;
+    border:none;
+    border-radius:10px;
+    background:#f3f4f6;
+    padding:0 8px;
+    font-size:13px;
+
+}
+
+input:focus,
+select:focus{
+
+    outline:none;
+    box-shadow:0 0 0 2px rgba(21,128,61,0.2);
+
+}
+
+.btn{
+
+    width:100%;
+    height:30px;
+    border:none;
+    border-radius:12px;
+    background:#15803d;
+    color:white;
+    font-size:14px;
+    font-weight:700;
+    cursor:pointer;
+    margin-top:10px;
+
+}
+
+/* ================= LISTADOS ================= */
+
+.lista{
+
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+
+}
+
+.item{
+
+    background:#f9fafb;
+    border-radius:10px;
+    padding:7px;
+    border-left:4px solid #15803d;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+
+}
+
+.item-top{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:4px;
+
+}
+
+.item-title{
+
+    font-size:14px;
+    font-weight:700;
+
+}
+
+.badge{
+
+    padding:4px 8px;
+    border-radius:20px;
+    font-size:10px;
+    font-weight:700;
+    color:white;
+
+}
+
+.badge.varones{
+
+    background:#2563eb;
+
+}
+
+.badge.mujeres{
+
+    background:#db2777;
+
+}
+
+.badge.cadetes{
+
+    background:#d97706;
+
+}
+
+.item-sub{
+
+    font-size:10px;
+    color:#6b7280;
+    margin-bottom:0px;
+white-space:nowrap;
+
+}
+
+/* ================= FOOTER ================= */
+
+.footer{
+
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:26px;
+    background:#111827;
+    overflow:hidden;
+
+}
+
+.footer-scroll{
+
+    white-space:nowrap;
+    line-height:26px;
+    color:white;
+    font-size:11px;
+    font-weight:600;
+    animation:scroll 20s linear infinite;
+
+}
+
+@keyframes scroll{
+
+    from{
+        transform:translateX(100%);
+    }
+
+    to{
+        transform:translateX(-100%);
+    }
+
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:700px){
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+.mini-btn{
+
+    flex:0.45;
+    font-size:11px;
+    font-weight:700;
+    color:white;
+
+}
+
+.excel-btn{
+
+    background:#84cc16 !important;
+
+}
+
+.pdf-btn{
+
+    background:#ef4444 !important;
+
+}
+
+.mini-btn.active{
+
+    background:#111827 !important;
+    color:white !important;
+
+}
+
+/* ================= TOP ROW ================= */
+
+.top-row{
+
+    display:grid;
+    grid-template-columns:90px 1fr 130px;
+    gap:8px;
+    margin-bottom:3px;
+
+}
+
+.num-equipo{
+
+    text-align:center;
+    font-weight:700;
+    font-size:16px;
+
+}
+
+.peña-input{
+
+    width:100%;
+
+}
+
+.categoria-box{
+
+    height:42px;
+    border-radius:10px;
+    background:#2563eb;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:0.5px;
+
+}
+
+.categoria-box.varones{
+
+    background:#2563eb;
+
+}
+
+.categoria-box.mujeres{
+
+    background:#db2777;
+
+}
+
+.categoria-box.cadetes{
+
+    background:#d97706;
+
+}
+
+.categoria-select{
+
+    height:30px;
+    border:none;
+    border-radius:10px;
+    background:#2563eb;
+    color:white;
+    text-align:center;
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:0.5px;
+padding:0 6px;
+}
+
+.estado-btn{
+    border:none;
+    background:#dc2626;
+    color:white;
+    font-size:10px;
+    font-weight:700;
+    padding:5px 8px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<div class="header">
+
+    <div class="header-overlay">
+
+        <div class="header-row">
+
+            <!-- LOGO IZQUIERDA -->
+
+            <img 
+            src="logo-vari.png"
+            class="logo-vari">
+
+            <!-- TITULOS -->
+
+            <div class="header-titles">
+
+<div class="titulo-pre">
+                    PANEL DE PRECARGA
+                </div>
+
+                <div class="titulo-1">
+                    Concurso de Pesca Variada
+                </div>
+
+                <div class="titulo-2">
+                    JAAUKANIGAS
+                </div>
+
+            </div>
+
+            <!-- LOGO MACLA -->
+
+          <div class="macla-box">
+
+    <div class="macla-text">
+        Desarrollado por
+    </div>
+
+    <img 
+    src="logo-macla.png"
+    class="logo-macla">
+
+</div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ================= TABS ================= -->
+
+<div class="tabs">
+
+    <button class="tab active"
+    onclick="showPanel('equipos',this)">
+        🚤 Equipos
+    </button>
+
+    <button class="tab"
+    onclick="showPanel('fiscales',this)">
+        👤 Fiscales
+    </button>
+
+<button 
+class="tab mini-btn excel-btn"
+onclick="exportarExcel()">
+    📄 Excel
+</button>
+
+<button 
+class="tab mini-btn pdf-btn"
+onclick="exportarPDF()">
+    📑 PDF
+</button>
+
+
+</div>
+
+<!-- ================= CONTENIDO ================= -->
+
+<div class="container">
+
+    <!-- EQUIPOS -->
+
+    <div class="panel active" id="equipos">
+
+        <div class="card">
+
+            <div class="card-title">
+                Nuevo Equipo
+            </div>
+
+            <div class="form-grid">
+
+                <div class="top-row">
+
+    <input type="number"
+    id="embNumero"
+    class="num-equipo"
+    placeholder="N°">
+
+    <input type="text"
+    id="embPeña"
+    class="peña-input"
+    placeholder="Peña">
+
+    <select
+id="categoriaEquipo"
+class="categoria-select">
+
+    <option value="varones">
+        VARONES
+    </option>
+
+    <option value="mujeres">
+        MUJERES
+    </option>
+
+    <option value="cadetes">
+        CADETES
+    </option>
+
+</select>
+
+</div>
+
+                <input type="text"
+                id="embTimonel"
+                class="full"
+                placeholder="Timonel">
+
+                <input type="text"
+                id="pescador1"
+                placeholder="Pescador 1">
+
+                <input type="number"
+                id="edad1"
+                placeholder="Edad">
+
+                <input type="text"
+                id="pescador2"
+                placeholder="Pescador 2">
+
+                <input type="number"
+                id="edad2"
+                placeholder="Edad">
+
+                <input type="text"
+                id="pescador3"
+                placeholder="Pescador 3">
+
+                <input type="number"
+                id="edad3"
+                placeholder="Edad">
+
+                <input type="text"
+                id="pescador4"
+                placeholder="Pescador 4">
+
+                <input type="number"
+                id="edad4"
+                placeholder="Edad">
+
+            </div>
+
+            <button class="btn"
+            onclick="guardarEquipo()">
+                Guardar Equipo
+            </button>
+
+        </div>
+
+        <div class="lista"
+        id="listaEquipos"></div>
+
+    </div>
+
+    <!-- FISCALES -->
+
+    <div class="panel" id="fiscales">
+
+        <div class="card">
+
+            <div class="card-title">
+                Nuevo Fiscal
+            </div>
+
+            <div class="form-grid">
+
+               <input type="number"
+id="fisNum"
+placeholder="N°">
+
+<input type="text"
+id="fisZona"
+placeholder="Zona">
+
+<input type="text"
+id="fisFiscal1"
+placeholder="Fiscal 1">
+
+<input type="text"
+id="fisFiscal2"
+placeholder="Fiscal 2">
+
+<input type="text"
+id="fisFiscal3"
+placeholder="Fiscal 3">
+
+<input type="text"
+id="fisUsuario"
+placeholder="Usuario">
+
+<input type="password"
+id="fisClave"
+placeholder="Clave">
+
+            </div>
+
+            <button class="btn"
+            onclick="guardarFiscal()">
+                Guardar Fiscal
+            </button>
+
+        </div>
+
+        <div class="lista"
+        id="listaFiscales"></div>
+
+    </div>
+
+  
+
+    </div>
+
+</div>
+
+<!-- ================= FOOTER ================= -->
+
+<div class="footer">
+
+    <div class="footer-scroll">
+
+        🎣 Sistema Oficial de Fiscalización Digital • 
+        Concurso de Pesca Variada JAAUKANIGAS • 
+        Desarrollado por MACLA IA •
+
+    </div>
+
+</div>
+
+<script>
+const SHEET_URL =
+'https://script.google.com/macros/s/AKfycbyayWhy6qryKf4_iMhRy2VNmR9LQMz4bxj1PfAFuAgrwv9l6D_mncB29-wq1n0sht-T/exec';
+
+/* ================= TABS ================= */
+
+function showPanel(id,btn){
+
+    document.querySelectorAll('.panel')
+    .forEach(p=>p.classList.remove('active'));
+
+    document.querySelectorAll('.tab')
+    .forEach(t=>t.classList.remove('active'));
+
+    document.getElementById(id)
+    .classList.add('active');
+
+    btn.classList.add('active');
+
+}
+
+/* ================= STORAGE ================= */
+
+let equipos =
+JSON.parse(localStorage.getItem('jaau_equipos')) || [];
+
+let fiscales =
+JSON.parse(localStorage.getItem('jaau_fiscales')) || [];
+
+window.onload = function(){
+
+    cargarEquiposSheets();
+
+};
+
+function actualizarCategoria(){
+
+    const edades = [
+
+        edad1.value,
+        edad2.value,
+        edad3.value,
+        edad4.value
+
+    ];
+
+    const nombres = [
+
+        pescador1.value,
+        pescador2.value,
+        pescador3.value,
+        pescador4.value
+
+    ];
+
+    const categoria =
+    categoriaEquipo.value;
+
+   
+
+}
+/* ================= EQUIPOS ================= */
+
+function guardarEquipo(){
+
+    const edades = [
+
+        edad1.value,
+        edad2.value,
+        edad3.value,
+        edad4.value
+
+    ];
+
+    const categoria =
+    categoriaEquipo.value;
+
+    const equipo = {
+
+        numero: embNumero.value,
+        peña: embPeña.value,
+        timonel: embTimonel.value,
+
+        pescadores:[
+
+            pescador1.value,
+            pescador2.value,
+            pescador3.value,
+            pescador4.value
+
+        ],
+
+        edades,
+        categoria
+
+    };
+
+    equipos.push(equipo);
+
+    localStorage.setItem(
+        'jaau_equipos',
+        JSON.stringify(equipos)
+    );
+
+    renderEquipos();
+enviarEquipoSheets(equipo);
+limpiarEquipo();
+
+}
+
+/* ================= LIMPIAR EQUIPO ================= */
+
+function limpiarEquipo(){
+
+    embNumero.value = '';
+    embPeña.value = '';
+    embTimonel.value = '';
+
+    pescador1.value = '';
+    edad1.value = '';
+
+    pescador2.value = '';
+    edad2.value = '';
+
+    pescador3.value = '';
+    edad3.value = '';
+
+    pescador4.value = '';
+    edad4.value = '';
+
+    categoriaEquipo.value = 'varones';
+
+}
+
+/* ================= ENVIAR EQUIPO ================= */
+
+function enviarEquipoSheets(equipo){
+
+    fetch("https://script.google.com/macros/s/AKfycbyayWhy6qryKf4_iMhRy2VNmR9LQMz4bxj1PfAFuAgrwv9l6D_mncB29-wq1n0sht-T/exec",{
+
+        method:"POST",
+
+        body:JSON.stringify({
+
+            tipo:'equipo',
+
+            numero:equipo.numero,
+            peña:equipo.peña,
+            timonel:equipo.timonel,
+            categoria:equipo.categoria,
+
+            pescador1:equipo.pescadores[0],
+            edad1:equipo.edades[0],
+
+            pescador2:equipo.pescadores[1],
+            edad2:equipo.edades[1],
+
+            pescador3:equipo.pescadores[2],
+            edad3:equipo.edades[2],
+
+            pescador4:equipo.pescadores[3],
+            edad4:equipo.edades[3]
+
+        })
+
+    })
+
+    .then(r=>r.json())
+    .then(r=>{
+
+        console.log(r);
+
+        alert('Equipo guardado');
+
+    });
+
+}
+
+function renderEquipos(){
+
+    listaEquipos.innerHTML = '';
+
+    equipos.forEach(e=>{
+
+        listaEquipos.innerHTML += `
+
+            <div class="item">
+
+                <div class="item-sub">
+                    🚤 EMB ${e.numero}
+                </div>
+
+                <div class="item-sub">
+                    ${e.peña}
+                </div>
+
+                <div class="item-sub">
+                    ${e.timonel}
+                </div>
+
+                <div class="item-sub">
+                    ${e.pescadores.join(' / ')}
+                </div>
+
+                <div class="badge ${e.categoria}">
+                    ${e.categoria.toUpperCase()}
+                </div>
+<button
+class="estado-btn"
+onclick="cambiarEstado('${e.numero}')">
+    DESACTIVAR
+</button>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+/* ================= FISCALES ================= */
+
+function guardarFiscal(){
+
+    const fiscal = {
+
+    num: fisNum.value,
+    zona: fisZona.value,
+
+    fiscal1: fisFiscal1.value,
+    fiscal2: fisFiscal2.value,
+    fiscal3: fisFiscal3.value,
+
+    usuario: fisUsuario.value,
+    clave: fisClave.value
+
+};
+
+    fiscales.push(fiscal);
+
+    localStorage.setItem(
+    'jaau_fiscales',
+    JSON.stringify(fiscales)
+    );
+
+    renderFiscales();
+enviarFiscalSheets(fiscal);
+limpiarFiscal();
+}
+
+/* ================= LIMPIAR FISCAL ================= */
+
+function limpiarFiscal(){
+
+    fisNum.value = '';
+    fisZona.value = '';
+
+    fisFiscal1.value = '';
+    fisFiscal2.value = '';
+    fisFiscal3.value = '';
+
+    fisUsuario.value = '';
+    fisClave.value = '';
+
+}
+
+/* ================= ENVIAR FISCAL ================= */
+
+function enviarFiscalSheets(fiscal){
+
+    fetch("https://script.google.com/macros/s/AKfycbyayWhy6qryKf4_iMhRy2VNmR9LQMz4bxj1PfAFuAgrwv9l6D_mncB29-wq1n0sht-T/exec",{
+
+        method:"POST",
+
+        body:JSON.stringify({
+
+            tipo:'fiscal',
+
+            num:fiscal.num,
+            zona:fiscal.zona,
+
+            fiscal1:fiscal.fiscal1,
+            fiscal2:fiscal.fiscal2,
+            fiscal3:fiscal.fiscal3,
+
+            usuario:fiscal.usuario,
+            clave:fiscal.clave
+
+        })
+
+    })
+
+    .then(r=>r.json())
+    .then(r=>{
+
+        console.log(r);
+
+        alert('Fiscal guardado');
+
+    });
+
+}
+
+function renderFiscales(){
+
+    listaFiscales.innerHTML = '';
+
+    fiscales.forEach(f=>{
+
+        listaFiscales.innerHTML += `
+
+            <div class="item">
+
+                <div class="item-top">
+
+                    <div class="item-title">
+                        👤 Fiscal ${f.num}
+                    </div>
+
+                </div>
+
+                <div class="item-sub">
+                    Zona: ${f.zona}
+                </div>
+
+                <div class="item-sub">
+                    ${f.fiscal1} / ${f.fiscal2} / ${f.fiscal3}
+                </div>
+
+                <div class="item-sub">
+                    Usuario: ${f.usuario}
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+/* ================= INIT ================= */
+
+renderEquipos();
+renderFiscales();
+
+/* ================= EXPORTAR EXCEL ================= */
+
+function exportarExcel(){
+
+    const datos = equipos.map(e=>({
+
+        Equipo:e.numero,
+        Peña:e.peña,
+        Timonel:e.timonel,
+        Categoria:e.categoria,
+
+        Pescador1:e.pescadores[0],
+        Edad1:e.edades[0],
+
+        Pescador2:e.pescadores[1],
+        Edad2:e.edades[1],
+
+        Pescador3:e.pescadores[2],
+        Edad3:e.edades[2],
+
+        Pescador4:e.pescadores[3],
+        Edad4:e.edades[3]
+
+    }));
+
+    const ws =
+    XLSX.utils.json_to_sheet(datos);
+
+    const wb =
+    XLSX.utils.book_new();
+
+    XLSX.utils.book_append_sheet(
+        wb,
+        ws,
+        "Equipos"
+    );
+
+    XLSX.writeFile(
+        wb,
+        "equipos-jaaukanigas.xlsx"
+    );
+
+}
+
+
+/* ================= EXPORTAR PDF ================= */
+
+async function exportarPDF(){
+
+    const { jsPDF } = window.jspdf;
+
+    const doc =
+    new jsPDF();
+
+    doc.setFontSize(16);
+
+    doc.text(
+        'Concurso Pesca Variada JAAUKANIGAS',
+        14,
+        16
+    );
+
+    const filas =
+    equipos.map(e=>[
+
+        e.numero,
+        e.peña,
+        e.timonel,
+        e.categoria,
+
+        e.pescadores.join(' / ')
+
+    ]);
+
+    doc.autoTable({
+
+        startY:25,
+
+        head:[[
+            'Equipo',
+            'Peña',
+            'Timonel',
+            'Categoria',
+            'Pescadores'
+        ]],
+
+        body:filas
+
+    });
+
+    doc.save(
+        'equipos-jaaukanigas.pdf'
+    );
+}
+
+async function cambiarEstado(numero){
+
+    const confirmar =
+    confirm(
+        '¿Desactivar equipo ' +
+        numero +
+        '?'
+    );
+
+    if(!confirmar) return;
+
+    const resp =
+    await fetch(
+        "https://script.google.com/macros/s/AKfycbyayWhy6qryKf4_iMhRy2VNmR9LQMz4bxj1PfAFuAgrwv9l6D_mncB29-wq1n0sht-T/exec",
+        {
+
+            method:"POST",
+
+            body:JSON.stringify({
+
+                tipo:"cambiar_estado",
+
+                numero:numero,
+
+                estado:"NO"
+            })
+        }
+    );
+
+    const data =
+    await resp.json();
+
+    if(data.ok){
+
+        alert(
+            "Equipo desactivado"
+        );
+    }
+}
+
+async function cargarEquiposSheets(){
+
+    const resp = await fetch(SHEET_URL,{
+
+        method:'POST',
+
+        body:JSON.stringify({
+
+            tipo:'listar_equipos'
+
+        })
+
+    });
+
+    const data =
+    await resp.json();
+
+    if(!data.ok) return;
+
+    equipos = data.equipos;
+
+    renderEquipos();
+
+}
+
+</script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+
+
+</body>
+</html>

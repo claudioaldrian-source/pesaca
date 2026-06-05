@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pesca Variada JAAUKANIGAS - Fiscal</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Inter',sans-serif;
+    background:#edf1f5;
+    color:#111827;
+}
+
+/* ================= HEADER ================= */
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:999;
+    background:white;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+    border-bottom:3px solid #dc2626;
+}
+
+.top-header{
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    gap:10px;
+    padding:10px;
+}
+
+.box{
+    background:#f3f4f6;
+    border-radius:10px;
+    padding:8px;
+    text-align:center;
+}
+
+.box-title{
+    font-size:10px;
+    font-weight:700;
+    color:#6b7280;
+}
+
+.box-value{
+    font-size:20px;
+    font-weight:700;
+}
+
+.logo{
+    text-align:center;
+}
+
+.logo img{
+    width:45px;
+}
+
+.logo-text{
+    font-size:11px;
+    font-weight:700;
+}
+
+/* ================= RESUMEN ================= */
+
+.resumen{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:6px;
+    padding:4px;
+    background:#111827;
+}
+
+.resumen-card{
+    background:#1f2937;
+    color:white;
+    border-radius:10px;
+    text-align:center;
+    padding:8px;
+}
+
+.resumen-num{
+    font-size:20px;
+    font-weight:700;
+}
+
+.resumen-label{
+    font-size:10px;
+    color:#d1d5db;
+}
+
+/* ================= CONTENIDO ================= */
+
+.container{
+    padding:8px;
+}
+
+/* ================= LISTAS ================= */
+
+.listas{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:7px;
+}
+
+.lista{
+    background:white;
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 3px 10px rgba(0,0,0,0.05);
+}
+
+/* ================= ITEM ================= */
+
+.item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:4px 6px;
+    border-bottom:1px solid green;
+    min-height:30px;
+    cursor:pointer;
+    transition:0.15s;
+    user-select:none;
+}
+
+.item:last-child{
+    border-bottom:none;
+}
+
+.item:hover{
+    background:#f9fafb;
+}
+
+.item.bloqueado:hover{
+    background:white;
+    cursor: not-allowed;
+}
+
+.item-name{
+    font-size:15px;
+    font-weight:500;
+    flex:1;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    background:yellow;
+    border-radius: 4px;
+padding:4px 8px;
+width:88%;
+}
+
+/* ================= ESTADOS ================= */
+
+.estado{
+    min-width:48px;
+    text-align:right;
+    font-size:15px;
+    font-weight:700;
+}
+
+.item.estado0{
+    background:white;
+    color:black;
+}
+
+.item.estado1{
+    background:#dcfce7;
+}
+
+.item.estado1 .estado{
+    color:#15803d;
+}
+
+.item.estado2{
+    background:#dbeafe;
+}
+
+.item.estado2 .estado{
+    color:#1d4ed8;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:700px){
+
+    .listas{
+        gap:6px;
+    }
+
+    .item{
+        padding:4px 6px;
+        min-height:42px;
+    }
+
+    .item-name{
+        font-size:12px;
+    }
+
+    .estado{
+        font-size:11px;
+        min-width:42px;
+    }
+
+}
+
+/* ================= FOOTER ================= */
+
+.footer-space{
+    height:0px;
+}
+
+/* ================= TICKER ================= */
+
+.ticker-wrap{
+    width:100%;
+    overflow:hidden;
+    background:#111827;
+    margin:10px 0;
+    border-top:2px solid #16a34a;
+    border-bottom:2px solid #16a34a;
+}
+
+.ticker{
+    white-space:nowrap;
+    color:#dcfce7;
+    font-size:13px;
+    font-weight:700;
+    padding:8px 0;
+    display:inline-block;
+    animation:tickerMove 18s linear infinite;
+}
+
+/* ANIMACION */
+
+@keyframes tickerMove{
+
+    from{
+        transform:translateX(100%);
+    }
+
+    to{
+        transform:translateX(-100%);
+    }
+
+}
+
+/* ================= PIEZAS MAYORES ================= */
+
+.mayores-box{
+    margin-top:10px;
+    background:#FCC6BB;
+    border-radius:14px;
+    padding:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.05);
+}
+
+.mayores-title{
+    font-size:15px;
+    font-weight:700;
+    color:blue;
+}
+
+.mayores-sub{
+    font-size:15px;
+    color:blue;
+    margin-bottom:0px;
+}
+
+.mayor-row{
+    display:grid;
+    grid-template-columns:140px auto;
+    gap:2px;
+    align-items:center;
+    margin-bottom:6px;
+}
+
+.mayor-row:last-child{
+    margin-bottom:0;
+}
+
+.mayor-name{
+    font-size:15px;
+    font-weight:600;
+    color:black;
+}
+
+.mayor-cm{
+    height:32px;
+    border:none;
+    border-radius:8px;
+    background:white;
+    text-align:center;
+    font-size:12px;
+    font-weight:700;
+}
+
+.mayor-cm:focus{
+    outline:none;
+    box-shadow:0 0 0 2px rgba(251,191,36,0.3);
+}
+
+.mayor-cm:disabled {
+    background: #e5e7eb;
+    color: #9ca3af;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* ================= HEADER NUEVO ================= */
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:999;
+    background:white;
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+    border-bottom:3px solid #dc2626;
+}
+
+.header-equipo{
+    padding:8px;
+}
+
+.header-row{
+    display:flex;
+    gap:6px;
+    margin-bottom:5px;
+    align-items:stretch;
+    flex-wrap:wrap;
+}
+
+.header-row:last-child{
+    margin-bottom:0;
+}
+
+.mini-box{
+    background:#f3f4f6;
+    border-radius:10px;
+    padding:5px 8px;
+}
+
+.emb-box{
+    width:70px;
+    text-align:center;
+    background:black;
+    color:white;
+}
+
+.jaauka-box{
+    flex:1;
+    background:red;
+    color:black;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.peña-box{
+    flex:1;
+    background:red;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+/* ================= DIGITAL ================= */
+
+.digital-btn{
+    background:white;
+    color:#111827;
+    border:none;
+    border-radius:10px;
+    min-width:95px;
+    height:auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:0px;
+    cursor:pointer;
+    box-shadow:2px 2px 5px rgba(0,0,0,0.15);
+    padding:2px 4px;
+    transition: all 0.3s ease;
+}
+
+.digital-btn.activado {
+    background: #16a34a;
+    color: white;
+    box-shadow: 0 0 15px rgba(22, 163, 74, 0.5);
+}
+
+.digital-btn.activado .digital-bottom {
+    color: white;
+}
+
+/* TEXTO SUPERIOR */
+
+.digital-top{
+    font-size:12px;
+    font-weight:600;
+    color:#374151;
+    line-height:1;
+}
+
+.digital-btn.activado .digital-top {
+    color: white;
+}
+
+/* TEXTO INFERIOR */
+
+.digital-bottom{
+    font-size:13px;
+    font-weight:800;
+}
+
+.mayores-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:8px;
+}
+
+/* ================= SYNC ================= */
+
+.sync-box{
+    width:72px;
+    background:#f3f4f6;
+    border-radius:10px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:4px;
+}
+
+.sync-logo{
+    width:60px;
+    object-fit:contain;
+}
+
+.logo-vari{
+    width:40px;
+    height:50px;
+    object-fit:contain;
+}
+
+.sync-text{
+    font-size:8px;
+    font-weight:700;
+    color:#6b7280;
+}
+
+.mini-label{
+    font-size:13px;
+    font-weight:700;
+    opacity:0.9;
+    text-align:center;
+    color:white;
+}
+
+.mini-value{
+    font-size:20px;
+    font-weight:700;
+    color:white;
+}
+
+.mini-text{
+    font-size:13px;
+    font-weight:700;
+    color:black;
+    text-align:center;
+}
+
+.info-line{
+    
+    background:#f3f4f6;
+    border-radius:8px;
+    padding:6px 8px;
+    font-size:12px;
+    text-align:center;
+flex:0 0 48%;
+}
+
+.info-label{
+    font-weight:700;
+    color:#374151;
+}
+
+/* ================= RESUMEN ================= */
+
+.resumen{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:5px;
+    padding:2px 10px;
+    background:#111827;
+}
+
+.resumen-card{
+    background:green;
+    color:white;
+    border-radius:8px;
+    text-align:center;
+    padding:3px;
+    min-height:25px;
+}
+
+.resumen-inline{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+}
+
+.resumen-num{
+    font-size:18px;
+    font-weight:700;
+}
+
+.resumen-label{
+    font-size:12px;
+    color:white;
+}
+
+.mini-input{
+    width:100%;
+    border:none;
+    background:transparent;
+    font-size:12px;
+    font-weight:700;
+    color:white;
+    text-align:center;
+}
+
+.mini-input:focus{
+    outline:none;
+}
+
+.emb-input{
+    width:100%;
+    border:none;
+    text-align:center;
+    font-size:15px;
+    font-weight:800;
+    color:green;
+}
+
+.emb-input:focus{
+    outline:none;
+}
+
+.mini-input::placeholder{
+    color:white;
+}
+
+.mediciones{
+    display:flex;
+    gap:6px;
+}
+
+.med-btn{
+    border:none;
+    background:white;
+    border-radius:8px;
+    min-width:52px;
+    height:34px;
+    font-size:11px;
+    font-weight:700;
+    cursor:pointer;
+    transition: all 0.2s ease;
+}
+
+.med-btn:disabled {
+    background: #e5e7eb;
+    color: #9ca3af;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.med-ok{
+    background:#16a34a !important;
+    color:white !important;
+}
+
+.login-equipo{
+
+    position:fixed;
+    inset:0;
+
+    background:#edf1f5;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    z-index:99999;
+
+}
+
+.login-card{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:16px;
+
+    width:300px;
+
+    text-align:center;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+
+}
+
+.login-card input{
+
+    width:100%;
+
+    height:50px;
+
+    margin:15px 0;
+
+    text-align:center;
+
+    font-size:22px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:10px;
+
+}
+
+.login-card button{
+
+    width:100%;
+
+    height:48px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#16a34a;
+
+    color:white;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+
+<div id="loginEquipo" class="login-equipo">
+
+    <div class="login-card">
+
+        <h2>CONCURSO DE PESCA VARIADA</h2>
+
+        <h3>JAAUKANIGAS</h3>
+
+        <input
+        id="numeroEquipo"
+        type="number"
+        placeholder="N° Embarcación">
+
+        <button onclick="ingresarEquipo()">
+            INGRESAR
+        </button>
+
+    </div>
+
+</div>
+
+<div id="contenidoApp" style="display:none;">
+
+<!-- ================= HEADER ================= -->
+
+<div class="header">
+
+    <!-- DATOS EQUIPOS -->
+
+    <div class="header-equipo">
+
+        <div class="header-row">
+
+            <!-- LOGO PESCA -->
+            <img src="logo-vari.png"
+                class="logo-vari">
+
+            <!-- TITULO -->
+            <div class="mini-box peña-box">
+                <div class="mini-label">
+                    CONCURSO DE PESCA VARIADA
+                </div>
+                <div class="mini-text">
+                    JAAUKANIGAS
+                </div>
+            </div>
+
+            <!-- DIGITAL BUTTON -->
+            <button class="digital-btn" id="btnActivar" onclick="toggleActivacion()">
+                <span class="digital-top">
+                    PLANILLA
+                </span>
+                <span class="digital-top">
+                    DIGITAL
+                </span>
+                <span class="digital-bottom" id="btnEstado">
+                    📲 ACTIVAR
+                </span>
+            </button>
+
+            <!-- EQUIPO -->
+            <div class="mini-box emb-box">
+    <div class="mini-label">
+        EQUIPO
+    </div>
+
+    <input
+    id="embNumero"
+    class="emb-input"
+    placeholder="00">
+
+</div>
+
+            <!-- PEÑA -->
+            <div class="mini-box peña-box">
+                <div class="mini-label">
+                    PEÑA
+                </div>
+                <input
+id="embPeña"
+class="mini-input"
+placeholder="Nombre">
+
+            </div>   
+</div>
+
+<div class="header-row">
+
+    <div class="info-line">
+
+        <span class="info-label">
+            TIMONEL:
+        </span>
+
+        <span id="datoTimonel"></span>
+
+    </div>
+
+    <div class="info-line">
+
+        <span class="info-label">
+            CATEGORÍA:
+        </span>
+
+        <span id="datoCategoria"></span>
+
+    </div>
+
+</div>
+
+<div class="header-row">
+
+    <div class="info-line">
+
+        <span class="info-label">
+            PESCADORES/AS:
+        </span>
+
+        <span id="datoPescadores"></span>
+
+    </div>
+
+</div>   
+     
+    </div>
+
+</div>
+
+    <!-- RESUMEN -->
+
+    <div class="resumen">
+
+        <div class="resumen-card">
+            <div class="resumen-inline">
+                <span class="resumen-num"
+                id="cantEspecies">0</span>
+                <span class="resumen-label">ESPECIES</span>
+            </div>        
+        </div>
+
+        <div class="resumen-card">
+            <div class="resumen-inline">
+                <span class="resumen-num"
+                id="cantPiezas">0</span>
+                <span class="resumen-label">PIEZAS</span>
+            </div>            
+        </div>
+
+        <div class="resumen-card">
+            <div class="resumen-inline">
+                <span class="resumen-num"
+                id="cantPuntos">0</span>
+                <span class="resumen-label">PUNTOS</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ================= LISTAS ================= -->
+
+<div class="container">
+
+    <div class="listas">
+        <div class="lista" id="lista1"></div>
+        <div class="lista" id="lista2"></div>
+        <div class="lista" id="lista3"></div>
+    </div>
+
+</div>
+
+<!-- ========= BANNER MACLA ======== -->
+<div class="ticker-wrap">
+
+    <div class="ticker">
+        ⚡ Concurso de pesca Variada JAAUKANIGAS •
+        Sincronizado por MACLA IA •
+        Claudio Aldrian •
+        Fiscalización Digital Inteligente •       
+    </div>
+
+</div>
+
+
+<!-- ================= PIEZAS MAYORES ================= -->
+
+<div class="mayores-box">
+
+    <div class="mayores-header">
+        <div class="mayores-title">
+            ⭐ PIEZAS MAYORES
+        </div>
+        <div class="mayores-sub">
+            Registrar medidas oficiales
+        </div>
+    </div>
+
+    <div id="mayores-list"></div>
+
+</div>   
+      
+     
+<script>
+
+const SHEET_URL =
+'https://script.google.com/macros/s/AKfycbyayWhy6qryKf4_iMhRy2VNmR9LQMz4bxj1PfAFuAgrwv9l6D_mncB29-wq1n0sht-T/exec';
+
+// ESTADO DE ACTIVACIÓN
+let planillaActivada = false;
+
+async function toggleActivacion() {
+
+    // SI YA ESTÁ ACTIVADA → DESACTIVAR
+    if(planillaActivada){
+
+        planillaActivada = false;
+
+        document
+        .getElementById('btnActivar')
+        .classList.remove('activado');
+
+        document
+        .getElementById('btnEstado')
+        .textContent = '📲 ACTIVAR';
+
+        bloquearPlanilla();
+
+        return;
+    }
+
+    // PEDIR CLAVE
+    const clave =
+    prompt('Ingrese clave fiscal');
+
+    if(!clave) return;
+
+//alert("Clave ingresada: " + clave);
+
+//alert(SHEET_URL);
+
+    // CONSULTAR APPS SCRIPT
+    const resp = await fetch(SHEET_URL,{
+
+        method:'POST',
+
+        body:JSON.stringify({
+
+            tipo:'validar_clave',
+            clave:clave
+        })
+    });
+
+    const data =
+    await resp.json();
+
+    if(!data.ok){
+
+        alert('Clave incorrecta');
+        return;
+    }
+
+    // ACTIVAR
+    planillaActivada = true;
+
+    document
+    .getElementById('btnActivar')
+    .classList.add('activado');
+
+    document
+    .getElementById('btnEstado')
+    .textContent = '✅ ACTIVADA';
+
+    desbloquearPlanilla();
+}
+
+// Función para bloquear la planilla
+function bloquearPlanilla() {
+    // Bloquear items
+    document.querySelectorAll('.item').forEach(item => {
+        item.classList.add('bloqueado');
+        item.onclick = null;
+    });
+    
+    // Bloquear botones de medición
+    document.querySelectorAll('.med-btn').forEach(btn => {
+        btn.disabled = true;
+    });
+    
+    // Bloquear inputs de piezas mayores
+    document.querySelectorAll('.mayor-cm').forEach(input => {
+        input.disabled = true;
+    });
+}
+
+// Función para desbloquear la planilla
+function desbloquearPlanilla() {
+    // Desbloquear items
+    document.querySelectorAll('.item').forEach(item => {
+        item.classList.remove('bloqueado');
+        // Recuperar el onclick original
+        const nombre = item.querySelector('.item-name').textContent;
+        item.onclick = function() {
+            cambiarEstadoItem(item);
+        };
+    });
+    
+    // Desbloquear botones de medición
+    document.querySelectorAll('.med-btn').forEach(btn => {
+        btn.disabled = false;
+    });
+    
+    // Desbloquear inputs de piezas mayores
+    document.querySelectorAll('.mayor-cm').forEach(input => {
+        input.disabled = false;
+    });
+}
+
+// Función para cambiar estado del item
+function cambiarEstadoItem(item) {
+    if (!planillaActivada) return; // Ignorar si está bloqueado
+    
+    let estado = Number(item.dataset.estado);
+    estado++;
+    
+    if(estado > 2){
+        estado = 0;
+    }
+    
+    item.dataset.estado = estado;
+    item.classList.remove("estado0","estado1","estado2");
+    item.classList.add("estado"+estado);
+    
+    const estadoBox = item.querySelector(".estado");
+    
+    if(estado == 0){
+        estadoBox.innerHTML = "—";
+    }else if(estado == 1){
+        estadoBox.innerHTML = "1ª";
+    }else{
+        estadoBox.innerHTML = "1ª 2ª";
+    }
+    
+    actualizarResumen();
+}
+
+const especies = [
+    "Amarillo",
+    "Apretador",
+    "Armado Chancho",
+    "Armado Gallego",
+    "Bagre Chaleco",
+    "Bagre Correntada",
+    "Boga",
+    "Corvina",
+    "Dientudo",
+    "Manduvé Cuchara",
+    "Manduvé Estrella",
+    "Moncholo",
+    "Ojón",
+    "Palometa",
+    "Patí",
+    "Picudo",
+    "Pirá Pitá",
+    "Raya",
+    "Salmón",
+    "Surubí Atigrado",
+    "Surubí Pinta",
+    "Tapé",
+    "Vieja del Agua",
+    "Mandí",
+    "Carimbatá",
+    "Morena",
+    "Pejerrey",
+    "Dorado"
+];
+
+const porColumna = Math.ceil(especies.length / 3);
+
+const lista1 = especies.slice(0,porColumna);
+
+const lista2 = especies.slice(
+    porColumna,
+    porColumna * 2
+);
+
+const lista3 = especies.slice(
+    porColumna * 2
+);
+
+renderLista(lista1,"lista1");
+renderLista(lista2,"lista2");
+renderLista(lista3,"lista3");
+
+
+function renderLista(lista,id){
+
+    const contenedor = document.getElementById(id);
+
+    lista.forEach(nombre=>{
+
+        const item = document.createElement("div");
+        item.className = "item estado0 bloqueado"; // Comienza bloqueado
+        item.dataset.estado = 0;
+
+        item.innerHTML = `
+            <div class="item-name">
+                ${nombre}
+            </div>
+            <div class="estado">
+                —
+            </div>
+        `;
+
+        // NO asignar onclick aquí, se hace en desbloquearPlanilla()
+        contenedor.appendChild(item);
+
+    });
+
+}
+
+function actualizarResumen(){
+
+    let especies = 0;
+    let piezas = 0;
+    let puntos = 0;
+
+    document.querySelectorAll(".item").forEach(item=>{
+
+        const estado = Number(item.dataset.estado);
+
+        if(estado > 0){
+            especies++;
+        }
+
+        if(estado == 1){
+            piezas += 1;
+            puntos += 200;
+        }
+
+        if(estado == 2){
+            piezas += 2;
+            puntos += 210;
+        }
+
+    });
+
+    document.getElementById("cantEspecies").innerText = especies;
+    document.getElementById("cantPiezas").innerText = piezas;
+    document.getElementById("cantPuntos").innerText = puntos;
+
+}
+
+/* ================= PIEZAS MAYORES ================= */
+
+const especiesMayores = [
+    'Armado Gallego',
+    'Patí',
+    'Surubí Pinta',
+    'Manduvé Cuchara',
+    'Moncholo'
+];
+
+const mayoresList =
+document.getElementById('mayores-list');
+
+especiesMayores.forEach(nombre => {
+
+    mayoresList.innerHTML += `
+    <div class="mayor-row">
+        <div class="mayor-name">
+            ${nombre}
+        </div>
+
+        <div class="mediciones">
+            <button class="med-btn" disabled
+            onclick="cargarMedida(this)">
+                1ª
+            </button>
+
+            <button class="med-btn" disabled
+            onclick="cargarMedida(this)">
+                2ª
+            </button>
+
+            <button class="med-btn" disabled
+            onclick="cargarMedida(this)">
+                3ª
+            </button>
+        </div>
+    </div>
+    `;
+});
+
+function cargarMedida(btn){
+    if (!planillaActivada) return; // Ignorar si está bloqueado    
+    const valor =
+    prompt('Ingresar medida en cm');
+    if(valor && valor !== ''){
+        btn.innerText =
+        valor + ' cm';
+        btn.classList.add('med-ok');
+    }
+}
+
+function ingresarEquipo(){
+    const numero =
+    document.getElementById(
+    'numeroEquipo'
+    ).value;
+    if(!numero){
+        alert(
+        'Ingrese número de embarcación'
+        );
+        return;
+    }
+    cargarEquipo(numero);
+}
+
+async function cargarEquipo(numero){
+
+    try{
+
+        const respuesta =
+        await fetch(
+            SHEET_URL,
+            {
+                method:'POST',
+                body:JSON.stringify({
+
+                    tipo:'obtener_equipo',
+
+                    numero:numero
+                })
+            }
+        );
+        const data =
+        await respuesta.json();
+
+        if(!data.ok){
+
+            alert(
+                'Equipo no encontrado'
+            );
+
+
+            return;    
+    }
+
+        const equipo =
+        data.equipo;
+
+localStorage.setItem(
+    'equipoLogueado',
+    equipo.numero
+);
+
+        document.getElementById(
+            'loginEquipo'
+        ).style.display='none';
+
+        document.getElementById(
+            'contenidoApp'
+        ).style.display='block';
+
+        document.getElementById(
+            'embNumero'
+        ).value =
+        equipo.numero;
+
+        document.getElementById(
+            'embPeña'
+        ).value =
+        equipo.peña;
+
+        document.getElementById(
+            'datoTimonel'
+        ).innerText =
+        equipo.timonel;
+
+document.getElementById(
+'datoCategoria'
+).innerText =
+equipo.categoria;
+
+        document.getElementById(
+            'datoPescadores'
+        ).innerText =
+        [
+            equipo.pescador1,
+            equipo.pescador2,
+            equipo.pescador3,
+            equipo.pescador4
+        ]
+        .filter(Boolean)
+        .join(' / ');
+    }
+    catch(error){
+
+        console.error(error);
+
+        alert(
+            'Error conectando con servidor'
+        );
+    }
+}
+
+window.onload = function(){
+
+    const equipoGuardado =
+    localStorage.getItem(
+        'equipoLogueado'
+    );
+
+    if(equipoGuardado){
+
+        cargarEquipo(
+            equipoGuardado
+        );
+    }
+};
+
+
+</script>
+</div>
+</body>
+</html>
