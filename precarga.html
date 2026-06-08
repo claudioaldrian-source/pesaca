@@ -545,6 +545,22 @@ padding:0 6px;
     cursor:pointer;
 }
 
+.cadete-box{
+    display:flex;
+    align-items:center;
+    gap:6px;
+
+    background:#f3f4f6;
+
+    padding:0 12px;
+
+    border-radius:10px;
+
+    font-weight:700;
+
+    font-size:13px;
+}
+
 </style>
 </head>
 
@@ -660,23 +676,15 @@ onclick="exportarPDF()">
     class="peña-input"
     placeholder="Peña">
 
-    <select
-id="categoriaEquipo"
-class="categoria-select">
-
-    <option value="varones">
-        VARONES
-    </option>
-
-    <option value="mujeres">
-        MUJERES
-    </option>
-
-    <option value="cadetes">
-        CADETES
-    </option>
-
+   <select id="categoriaEquipo">
+    <option value="varones">VARONES</option>
+    <option value="mujeres">MUJERES</option>
 </select>
+
+<label class="cadete-box">
+    <input type="checkbox" id="esCadete">
+    CADETE
+</label>
 
 </div>
 
@@ -884,23 +892,24 @@ function guardarEquipo(){
 
     const equipo = {
 
-        numero: embNumero.value,
-        peña: embPeña.value,
-        timonel: embTimonel.value,
+    numero: embNumero.value,
+    peña: embPeña.value,
+    timonel: embTimonel.value,
 
-        pescadores:[
+    categoria: categoria,
 
-            pescador1.value,
-            pescador2.value,
-            pescador3.value,
-            pescador4.value
+    cadete: esCadete.checked ? 'SI' : 'NO',
 
-        ],
+    pescadores:[
+        pescador1.value,
+        pescador2.value,
+        pescador3.value,
+        pescador4.value
+    ],
 
-        edades,
-        categoria
+    edades
 
-    };
+};
 
     equipos.push(equipo);
 
