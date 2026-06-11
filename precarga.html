@@ -188,11 +188,12 @@ padding:0 70px;
 /* ================= TABS ================= */
 
 .tabs{
-
-    display:grid;
+    align-items:center;
+    display:flex;
     grid-template-columns:1fr 1fr 90px 90px;
     gap:6px;
     padding:6px 8px 2px 8px;
+flex-wrap:nowrap;
 
 }
 
@@ -260,15 +261,10 @@ padding:0 70px;
 /* ================= FORM ================= */
 
 .form-grid{
-
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px;
-
+    width:100%;
 }
 
 .full{
-
     grid-column:1 / -1;
 
 }
@@ -427,15 +423,11 @@ white-space:nowrap;
 @media(max-width:700px){
 
     .form-grid{
-
         grid-template-columns:1fr;
-
     }
-
 }
 
 .mini-btn{
-
     flex:0.45;
     font-size:11px;
     font-weight:700;
@@ -444,13 +436,11 @@ white-space:nowrap;
 }
 
 .excel-btn{
-
     background:#84cc16 !important;
 
 }
 
 .pdf-btn{
-
     background:#ef4444 !important;
 
 }
@@ -548,17 +538,90 @@ padding:0 6px;
 .cadete-box{
     display:flex;
     align-items:center;
+    justify-content:center;
     gap:6px;
-
     background:#f3f4f6;
-
-    padding:0 12px;
-
     border-radius:10px;
+    height:30px;
+    font-size:12px;
+    font-weight:700;
+    padding:0 8px;
+}
+
+.fila4{
+    display:grid;
+
+    grid-template-columns:
+    100px   /* varones */
+    90px    /* cadete */
+    1fr     /* peña */
+    1fr;    /* timonel */
+
+    gap:8px;
+    margin-bottom:8px;
+}
+
+.fila2{
+    display:grid;
+    grid-template-columns:
+    minmax(250px,1fr)
+    180px;
+
+    gap:8px;
+    margin-bottom:8px;
+}
+
+.categoria-mini{
+    width:100px !important;
+}
+
+#categoriaEquipo{
+    width:100px;
+}
+
+.cadete-box{
+    width:90px;
+}
+
+.sheet-btn{
+    border:none;
+    background:#2563eb;
+    color:white;
+    font-size:12px;
+    font-weight:700;
+    border-radius:10px;
+    padding:0 16px;
+    height:30px;
+    cursor:pointer;
+}
+
+.editar-btn{
+
+    border:none;
+
+    background:#f59e0b;
+
+    color:white;
+
+    font-size:10px;
 
     font-weight:700;
 
-    font-size:13px;
+    padding:5px 8px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+}
+
+.editar-btn-main{
+
+    background:#f59e0b !important;
+
+    width:180px !important;
+
+    flex:none;
+
 }
 
 </style>
@@ -633,6 +696,12 @@ padding:0 6px;
         👤 Fiscales
     </button>
 
+<button
+class="sheet-btn"
+onclick="window.open('https://docs.google.com/spreadsheets/d/1bjEkhi_3uK2Fd49jylabYY3bF1l5ATl76cg8lQu5TgI/edit','_blank')">
+📊 Sheet
+</button>
+
 <button 
 class="tab mini-btn excel-btn"
 onclick="exportarExcel()">
@@ -662,82 +731,100 @@ onclick="exportarPDF()">
                 Nuevo Equipo
             </div>
 
-            <div class="form-grid">
+<div class="form-grid">
 
-                <div class="top-row">
-
+    <!-- FILA 1 -->
+<div class="fila4">
     <input type="number"
     id="embNumero"
-    class="num-equipo"
     placeholder="N°">
+
+<input type="number"
+    id="hpEmb"
+    placeholder="HP">
+
+    <input type="text"
+    id="nombreEmb"
+    placeholder="Nombre Embarcación">    
+
+    <input type="text"
+    id="matriculaEmb"
+    placeholder="Matrícula">
+</div>
+
+    <!-- FILA 2 -->
+<div class="fila4">
+
+    <select id="categoriaEquipo">
+        <option value="varones">VARONES</option>
+        <option value="mujeres">MUJERES</option>
+    </select>
+
+    <label class="cadete-box">
+        <input type="checkbox" id="esCadete">
+        CADETE
+    </label>
 
     <input type="text"
     id="embPeña"
-    class="peña-input"
     placeholder="Peña">
 
-   <select id="categoriaEquipo">
-    <option value="varones">VARONES</option>
-    <option value="mujeres">MUJERES</option>
-</select>
-
-<label class="cadete-box">
-    <input type="checkbox" id="esCadete">
-    CADETE
-</label>
+    <input type="text"
+    id="embTimonel"
+    placeholder="Timonel">
 
 </div>
 
-                <input type="text"
-                id="embTimonel"
-                class="full"
-                placeholder="Timonel">
+    <!-- FILA 3 -->
+<div class="fila2">
+    <input type="text"
+    id="pescador1"
+    placeholder="Pescador 1">
 
-                <input type="text"
-                id="pescador1"
-                placeholder="Pescador 1">
+    <input type="text"
+    id="dni1"
+    placeholder="DNI 1">
+</div>
 
-                <input type="number"
-                id="edad1"
-                placeholder="Edad">
+    <!-- FILA 4 -->
+<div class="fila2">
+    <input type="text"
+    id="pescador2"
+    placeholder="Pescador 2">
 
-                <input type="text"
-                id="pescador2"
-                placeholder="Pescador 2">
+    <input type="text"
+    id="dni2"
+    placeholder="DNI 2">
+</div>
 
-                <input type="number"
-                id="edad2"
-                placeholder="Edad">
+    <!-- FILA 5 -->
+<div class="fila2">
+    <input type="text"
+    id="pescador3"
+    placeholder="Pescador 3">
 
-                <input type="text"
-                id="pescador3"
-                placeholder="Pescador 3">
+    <input type="text"
+    id="dni3"
+    placeholder="DNI 3">
+</div>
+</div>
+            <div style="display:flex;gap:8px;">
 
-                <input type="number"
-                id="edad3"
-                placeholder="Edad">
+    <button
+    class="btn"
+    onclick="guardarEquipo()">
+        Guardar Equipo
+    </button>
 
-                <input type="text"
-                id="pescador4"
-                placeholder="Pescador 4">
+    <button
+    class="btn editar-btn-main"
+    onclick="buscarEquipoEditar()">
+        ✏️ Editar
+    </button>
 
-                <input type="number"
-                id="edad4"
-                placeholder="Edad">
-
-            </div>
-
-            <button class="btn"
-            onclick="guardarEquipo()">
-                Guardar Equipo
-            </button>
-
-        </div>
-
-        <div class="lista"
-        id="listaEquipos"></div>
-
-    </div>
+</div>
+</div>
+  
 
     <!-- FISCALES -->
 
@@ -848,79 +935,127 @@ window.onload = function(){
 
 };
 
-function actualizarCategoria(){
-
-    const edades = [
-
-        edad1.value,
-        edad2.value,
-        edad3.value,
-        edad4.value
-
-    ];
-
-    const nombres = [
-
-        pescador1.value,
-        pescador2.value,
-        pescador3.value,
-        pescador4.value
-
-    ];
-
-    const categoria =
-    categoriaEquipo.value;
-
-   
-
-}
 /* ================= EQUIPOS ================= */
-
 function guardarEquipo(){
-
-    const edades = [
-
-        edad1.value,
-        edad2.value,
-        edad3.value,
-        edad4.value
-
-    ];
 
     const categoria =
     categoriaEquipo.value;
 
     const equipo = {
 
-    numero: embNumero.value,
-    peña: embPeña.value,
-    timonel: embTimonel.value,
+        numero: embNumero.value,
 
-    categoria: categoria,
+        peña: embPeña.value,
 
-    cadete: esCadete.checked ? 'SI' : 'NO',
+        categoria: categoria,
 
-    pescadores:[
-        pescador1.value,
-        pescador2.value,
-        pescador3.value,
-        pescador4.value
-    ],
+        timonel: embTimonel.value,
 
-    edades
+        cadete: esCadete.checked ? 'SI' : 'NO',
 
-};
+        nombre_emb: nombreEmb.value,
 
-    equipos.push(equipo);
+        hp: hpEmb.value,
 
-    localStorage.setItem(
-        'jaau_equipos',
-        JSON.stringify(equipos)
+        matricula: matriculaEmb.value,
+
+        pescador1: pescador1.value,
+        dni1: dni1.value,
+
+        pescador2: pescador2.value,
+        dni2: dni2.value,
+
+        pescador3: pescador3.value,
+        dni3: dni3.value
+    };
+
+      
+    enviarEquipoSheets(equipo);
+
+    limpiarEquipo();
+}
+
+async function buscarEquipoEditar(){
+
+    const numero =
+    prompt('Número de equipo');
+
+    if(!numero) return;
+
+    const resp =
+    await fetch(SHEET_URL,{
+
+        method:'POST',
+
+        body:JSON.stringify({
+
+            tipo:'obtener_equipo',
+
+            numero:numero
+
+        })
+
+    });
+
+    const data =
+    await resp.json();
+
+    if(!data.ok){
+
+        alert('Equipo no encontrado');
+
+        return;
+
+    }
+
+    const e =
+    data.equipo;
+
+    embNumero.value =
+    e.numero || '';
+
+    embPeña.value =
+    e.peña || '';
+
+    embTimonel.value =
+    e.timonel || '';
+
+    nombreEmb.value =
+    e.nombre_emb || '';
+
+    hpEmb.value =
+    e.hp || '';
+
+    matriculaEmb.value =
+    e.matricula || '';
+
+    pescador1.value =
+    e.pescador1 || '';
+
+    dni1.value =
+    e.dni1 || '';
+
+    pescador2.value =
+    e.pescador2 || '';
+
+    dni2.value =
+    e.dni2 || '';
+
+    pescador3.value =
+    e.pescador3 || '';
+
+    dni3.value =
+    e.dni3 || '';
+
+    categoriaEquipo.value =
+    e.categoria || 'varones';
+
+    esCadete.checked =
+    e.cadete === 'SI';
+
+    alert(
+        'Equipo cargado para editar'
     );
-
-    renderEquipos();
-enviarEquipoSheets(equipo);
-limpiarEquipo();
 
 }
 
@@ -929,20 +1064,27 @@ limpiarEquipo();
 function limpiarEquipo(){
 
     embNumero.value = '';
+
     embPeña.value = '';
+
     embTimonel.value = '';
 
+    nombreEmb.value = '';
+
+    hpEmb.value = '';
+
+    matriculaEmb.value = '';
+
     pescador1.value = '';
-    edad1.value = '';
+    dni1.value = '';
 
     pescador2.value = '';
-    edad2.value = '';
+    dni2.value = '';
 
     pescador3.value = '';
-    edad3.value = '';
+    dni3.value = '';
 
-    pescador4.value = '';
-    edad4.value = '';
+    esCadete.checked = false;
 
     categoriaEquipo.value = 'varones';
 
@@ -960,80 +1102,48 @@ function enviarEquipoSheets(equipo){
 
             tipo:'equipo',
 
-            numero:equipo.numero,
-            peña:equipo.peña,
-            timonel:equipo.timonel,
-            categoria:equipo.categoria,
+            numero: equipo.numero,
 
-            pescador1:equipo.pescadores[0],
-            edad1:equipo.edades[0],
+            peña: equipo.peña,
 
-            pescador2:equipo.pescadores[1],
-            edad2:equipo.edades[1],
+            categoria: equipo.categoria,
 
-            pescador3:equipo.pescadores[2],
-            edad3:equipo.edades[2],
+            timonel: equipo.timonel,
 
-            pescador4:equipo.pescadores[3],
-            edad4:equipo.edades[3]
+            pescador1: equipo.pescador1,
+            dni1: equipo.dni1,
 
+            pescador2: equipo.pescador2,
+            dni2: equipo.dni2,
+
+            pescador3: equipo.pescador3,
+            dni3: equipo.dni3,
+
+            cadete: equipo.cadete,
+
+            nombre_emb: equipo.nombre_emb,
+
+            hp: equipo.hp,
+
+            matricula: equipo.matricula
         })
-
     })
 
-    .then(r=>r.json())
-    .then(r=>{
+    .then(r => r.json())
+
+    .then(r => {
 
         console.log(r);
 
         alert('Equipo guardado');
-
     });
-
 }
 
 function renderEquipos(){
-
-    listaEquipos.innerHTML = '';
-
-    equipos.forEach(e=>{
-
-        listaEquipos.innerHTML += `
-
-            <div class="item">
-
-                <div class="item-sub">
-                    🚤 EMB ${e.numero}
-                </div>
-
-                <div class="item-sub">
-                    ${e.peña}
-                </div>
-
-                <div class="item-sub">
-                    ${e.timonel}
-                </div>
-
-                <div class="item-sub">
-                    ${e.pescadores.join(' / ')}
-                </div>
-
-                <div class="badge ${e.categoria}">
-                    ${e.categoria.toUpperCase()}
-                </div>
-<button
-class="estado-btn"
-onclick="cambiarEstado('${e.numero}')">
-    DESACTIVAR
-</button>
-
-            </div>
-
-        `;
-
-    });
-
+    return;
 }
+
+
 
 /* ================= FISCALES ================= */
 
@@ -1158,7 +1268,7 @@ function renderFiscales(){
 
 /* ================= INIT ================= */
 
-renderEquipos();
+//renderEquipos();
 renderFiscales();
 
 /* ================= EXPORTAR EXCEL ================= */
@@ -1317,7 +1427,7 @@ async function cargarEquiposSheets(){
 
     equipos = data.equipos;
 
-    renderEquipos();
+    //renderEquipos();
 
 }
 
