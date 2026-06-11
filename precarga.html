@@ -389,7 +389,7 @@ white-space:nowrap;
     bottom:0;
     left:0;
     width:100%;
-    height:26px;
+    height:40px;
     background:#111827;
     overflow:hidden;
 
@@ -398,24 +398,21 @@ white-space:nowrap;
 .footer-scroll{
 
     white-space:nowrap;
-    line-height:26px;
-    color:white;
-    font-size:11px;
+    line-height:40px;
+    color:#BBF451;
+    font-size:20px;
     font-weight:600;
     animation:scroll 20s linear infinite;
 
 }
 
 @keyframes scroll{
-
     from{
         transform:translateX(100%);
     }
-
     to{
         transform:translateX(-100%);
     }
-
 }
 
 /* ================= MOBILE ================= */
@@ -615,13 +612,156 @@ padding:0 6px;
 }
 
 .editar-btn-main{
-
     background:#f59e0b !important;
-
     width:180px !important;
-
     flex:none;
+}
 
+.logout-btn{
+    background:#222;
+    color:#fff;
+}
+
+.logout-btn:hover{
+    background:#000;
+}
+
+/* ================= LOGIN ================= */
+
+.login-box{
+
+    position:fixed;
+    inset:0;
+
+    background:
+    linear-gradient(
+        135deg,
+        #0f172a,
+        #1e293b
+    );
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    z-index:9999;
+}
+
+.login-card{
+
+    width:380px;
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(14px);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    border-radius:24px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:
+    0 20px 60px rgba(0,0,0,.35);
+}
+
+.login-logo{
+
+    width:120px;
+
+    margin-bottom:15px;
+}
+
+.login-title{
+
+    color:white;
+
+    font-size:14px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+}
+
+.login-subtitle{
+
+    color:#cbd5e1;
+
+    margin-top:5px;
+
+    font-size:14px;
+}
+
+.login-jaau{
+
+    color:#22c55e;
+
+    font-size:28px;
+
+    font-weight:900;
+
+    margin:10px 0 25px 0;
+}
+
+.login-input{
+
+    width:100%;
+
+    height:45px;
+
+    border:none;
+
+    border-radius:12px;
+
+    margin-bottom:12px;
+
+    padding:0 14px;
+
+    font-size:15px;
+}
+
+.login-btn{
+
+    width:100%;
+
+    height:48px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#16a34a;
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+.login-btn:hover{
+
+    background:#15803d;
+}
+
+.login-macla{
+
+    margin-top:20px;
+
+    color:#cbd5e1;
+
+    font-size:12px;
+}
+
+.login-macla-logo{
+
+    width:90px;
+
+    margin-top:8px;
 }
 
 </style>
@@ -629,8 +769,61 @@ padding:0 6px;
 
 <body>
 
+<div id="loginBox" class="login-box">
+
+    <div class="login-card">
+
+        <img
+        src="logo-vari.png"
+        class="login-logo">
+
+        <div class="login-title">
+            PANEL DE PRECARGA
+        </div>
+
+        <div class="login-subtitle">
+            Concurso de Pesca Variada
+        </div>
+
+        <div class="login-jaau">
+            JAAUKANIGAS
+        </div>
+
+        <input
+        id="usuarioLogin"
+        class="login-input"
+        placeholder="Usuario">
+
+        <input
+        id="claveLogin"
+        type="password"
+        class="login-input"
+        placeholder="Clave">
+
+        <button
+        class="login-btn"
+        onclick="login()">
+            INGRESAR
+        </button>
+
+        <div class="login-macla">
+
+            <span>
+                Desarrollado por
+            </span>
+
+            <img
+            src="logo-macla.png"
+            class="login-macla-logo">
+
+        </div>
+
+    </div>
+
+</div>
 
 <!-- ================= HEADER ================= -->
+<div id="sistema" style="display:none;">
 
 <div class="header">
 
@@ -808,7 +1001,8 @@ onclick="exportarPDF()">
     placeholder="DNI 3">
 </div>
 </div>
-            <div style="display:flex;gap:8px;">
+ 
+<div style="display:flex;gap:8px;">
 
     <button
     class="btn"
@@ -822,7 +1016,14 @@ onclick="exportarPDF()">
         ✏️ Editar
     </button>
 
+    <button
+    class="btn logout-btn"
+    onclick="cerrarSesion()">
+        🚪 Cerrar sesión
+    </button>
+
 </div>
+
 </div>
   
 
@@ -867,40 +1068,31 @@ id="fisClave"
 placeholder="Clave">
 
             </div>
-
             <button class="btn"
             onclick="guardarFiscal()">
                 Guardar Fiscal
             </button>
-
         </div>
 
         <div class="lista"
         id="listaFiscales"></div>
-
+    </div> 
     </div>
-
-  
-
-    </div>
-
 </div>
 
 <!-- ================= FOOTER ================= -->
-
 <div class="footer">
-
     <div class="footer-scroll">
-
         🎣 Sistema Oficial de Fiscalización Digital • 
         Concurso de Pesca Variada JAAUKANIGAS • 
-        Desarrollado por MACLA IA •
-
+        Desarrollado por MACLA IA • Claudio ALDRIAN - CEL.+549 3482-530384 *
     </div>
-
+</div>
 </div>
 
+
 <script>
+
 const SHEET_URL =
 'https://script.google.com/macros/s/AKfycbyayWhy6qryKf4_iMhRy2VNmR9LQMz4bxj1PfAFuAgrwv9l6D_mncB29-wq1n0sht-T/exec';
 
@@ -918,28 +1110,46 @@ function showPanel(id,btn){
     .classList.add('active');
 
     btn.classList.add('active');
+}
 
+function cerrarSesion(){
+    localStorage.removeItem('logueado');
+    document.getElementById('usuarioLogin').value='';
+    document.getElementById('claveLogin').value='';
+    document.getElementById('sistema').style.display='none';
+    document.getElementById('loginBox').style.display='block';
 }
 
 /* ================= STORAGE ================= */
 
-let equipos =
-JSON.parse(localStorage.getItem('jaau_equipos')) || [];
+let modoEdicion = false;
+
+let equipos = [];
 
 let fiscales =
 JSON.parse(localStorage.getItem('jaau_fiscales')) || [];
 
 window.onload = function(){
+    if(
+        localStorage.getItem('logueado')
+        === 'SI'
+    ){
+        document.getElementById('loginBox')
+        .style.display='none';
 
+        document.getElementById('sistema')
+        .style.display='block';
+    }
     cargarEquiposSheets();
-
 };
 
 /* ================= EQUIPOS ================= */
+
 function guardarEquipo(){
 
     const categoria =
     categoriaEquipo.value;
+
 
     const equipo = {
 
@@ -968,19 +1178,28 @@ function guardarEquipo(){
         pescador3: pescador3.value,
         dni3: dni3.value
     };
-
       
-    enviarEquipoSheets(equipo);
+ if(modoEdicion){
 
-    limpiarEquipo();
+    actualizarEquipoSheets(equipo);
+
+}else{
+
+    enviarEquipoSheets(equipo);
 }
+
+limpiarEquipo();
+}
+
 
 async function buscarEquipoEditar(){
 
-    const numero =
-    prompt('Número de equipo');
+    const busqueda =
+    prompt(
+    'Ingrese N° de equipo o Nombre de embarcación'
+    );
 
-    if(!numero) return;
+    if(!busqueda) return;
 
     const resp =
     await fetch(SHEET_URL,{
@@ -989,9 +1208,9 @@ async function buscarEquipoEditar(){
 
         body:JSON.stringify({
 
-            tipo:'obtener_equipo',
+            tipo:'obtener_equipo_nombre',
 
-            numero:numero
+            busqueda:busqueda
 
         })
 
@@ -999,6 +1218,8 @@ async function buscarEquipoEditar(){
 
     const data =
     await resp.json();
+
+    console.log(data);
 
     if(!data.ok){
 
@@ -1008,44 +1229,28 @@ async function buscarEquipoEditar(){
 
     }
 
-    const e =
-    data.equipo;
+    const e = data.equipo;
 
-    embNumero.value =
-    e.numero || '';
+    embNumero.value = e.numero || '';
 
-    embPeña.value =
-    e.peña || '';
+    embPeña.value = e.peña || '';
 
-    embTimonel.value =
-    e.timonel || '';
+    embTimonel.value = e.timonel || '';
 
-    nombreEmb.value =
-    e.nombre_emb || '';
+    nombreEmb.value = e.nombre_emb || '';
 
-    hpEmb.value =
-    e.hp || '';
+    hpEmb.value = e.hp || '';
 
-    matriculaEmb.value =
-    e.matricula || '';
+    matriculaEmb.value = e.matricula || '';
 
-    pescador1.value =
-    e.pescador1 || '';
+    pescador1.value = e.pescador1 || '';
+    dni1.value = e.dni1 || '';
 
-    dni1.value =
-    e.dni1 || '';
+    pescador2.value = e.pescador2 || '';
+    dni2.value = e.dni2 || '';
 
-    pescador2.value =
-    e.pescador2 || '';
-
-    dni2.value =
-    e.dni2 || '';
-
-    pescador3.value =
-    e.pescador3 || '';
-
-    dni3.value =
-    e.dni3 || '';
+    pescador3.value = e.pescador3 || '';
+    dni3.value = e.dni3 || '';
 
     categoriaEquipo.value =
     e.categoria || 'varones';
@@ -1053,9 +1258,9 @@ async function buscarEquipoEditar(){
     esCadete.checked =
     e.cadete === 'SI';
 
-    alert(
-        'Equipo cargado para editar'
-    );
+    modoEdicion = true;
+
+    alert('Equipo cargado para editar');
 
 }
 
@@ -1093,6 +1298,7 @@ function limpiarEquipo(){
 /* ================= ENVIAR EQUIPO ================= */
 
 function enviarEquipoSheets(equipo){
+
 
     fetch("https://script.google.com/macros/s/AKfycbyayWhy6qryKf4_iMhRy2VNmR9LQMz4bxj1PfAFuAgrwv9l6D_mncB29-wq1n0sht-T/exec",{
 
@@ -1138,6 +1344,61 @@ function enviarEquipoSheets(equipo){
         alert('Equipo guardado');
     });
 }
+
+
+function actualizarEquipoSheets(equipo){
+
+    fetch(SHEET_URL,{
+
+        method:"POST",
+
+        body:JSON.stringify({
+
+            tipo:'actualizar_equipo',
+
+            numero: equipo.numero,
+
+            peña: equipo.peña,
+
+            categoria: equipo.categoria,
+
+            timonel: equipo.timonel,
+
+            pescador1: equipo.pescador1,
+            dni1: equipo.dni1,
+
+            pescador2: equipo.pescador2,
+            dni2: equipo.dni2,
+
+            pescador3: equipo.pescador3,
+            dni3: equipo.dni3,
+
+            cadete: equipo.cadete,
+
+            nombre_emb: equipo.nombre_emb,
+
+            hp: equipo.hp,
+
+            matricula: equipo.matricula
+
+        })
+
+    })
+
+    .then(r=>r.json())
+
+    .then(r=>{
+
+        console.log(r);
+
+        alert('Equipo actualizado');
+
+        modoEdicion = false;
+
+    });
+
+}
+
 
 function renderEquipos(){
     return;
@@ -1276,25 +1537,38 @@ renderFiscales();
 function exportarExcel(){
 
     const datos = equipos.map(e=>({
+Orden:e.orden,
 
-        Equipo:e.numero,
-        Peña:e.peña,
-        Timonel:e.timonel,
-        Categoria:e.categoria,
+fecha_hora: e.fecha_hora,
 
-        Pescador1:e.pescadores[0],
-        Edad1:e.edades[0],
+    num_equipo: e.numero,
 
-        Pescador2:e.pescadores[1],
-        Edad2:e.edades[1],
+    peña: e.peña,
 
-        Pescador3:e.pescadores[2],
-        Edad3:e.edades[2],
+    categoria: e.categoria,
 
-        Pescador4:e.pescadores[3],
-        Edad4:e.edades[3]
+    timonel: e.timonel,
 
-    }));
+    pescador1: e.pescador1,
+    dni1: e.dni1,
+
+    pescador2: e.pescador2,
+    dni2: e.dni2,
+
+    pescador3: e.pescador3,
+    dni3: e.dni3,
+
+    cadete: e.cadete,
+
+    nombre_emb: e.nombre_emb,
+
+    hp: e.hp,
+
+    matricula: e.matricula
+
+}));
+
+console.log(datos);
 
     const ws =
     XLSX.utils.json_to_sheet(datos);
@@ -1310,11 +1584,9 @@ function exportarExcel(){
 
     XLSX.writeFile(
         wb,
-        "equipos-jaaukanigas.xlsx"
+        "equipos-jaaukanigas-NUEVO.xlsx"
     );
-
 }
-
 
 /* ================= EXPORTAR PDF ================= */
 
@@ -1323,7 +1595,7 @@ async function exportarPDF(){
     const { jsPDF } = window.jspdf;
 
     const doc =
-    new jsPDF();
+    new jsPDF('landscape');
 
     doc.setFontSize(16);
 
@@ -1337,11 +1609,22 @@ async function exportarPDF(){
     equipos.map(e=>[
 
         e.numero,
+
         e.peña,
-        e.timonel,
+
         e.categoria,
 
-        e.pescadores.join(' / ')
+        e.timonel,
+
+        e.nombre_emb,
+
+        e.hp,
+
+        e.pescador1,
+
+        e.pescador2,
+
+        e.pescador3
 
     ]);
 
@@ -1350,11 +1633,25 @@ async function exportarPDF(){
         startY:25,
 
         head:[[
+
             'Equipo',
+
             'Peña',
-            'Timonel',
+
             'Categoria',
-            'Pescadores'
+
+            'Timonel',
+
+            'Embarcación',
+
+            'HP',
+
+            'Pescador 1',
+
+            'Pescador 2',
+
+            'Pescador 3'
+
         ]],
 
         body:filas
@@ -1365,6 +1662,7 @@ async function exportarPDF(){
         'equipos-jaaukanigas.pdf'
     );
 }
+
 
 async function cambiarEstado(numero){
 
@@ -1428,12 +1726,58 @@ async function cargarEquiposSheets(){
     equipos = data.equipos;
 
     //renderEquipos();
+}
 
+async function login(){
+    const usuario =
+    document.getElementById(
+    'usuarioLogin').value;
+
+    const clave =
+    document.getElementById(
+    'claveLogin').value;
+
+    const resp =
+    await fetch(SHEET_URL,{
+
+        method:'POST',
+
+        body:JSON.stringify({
+
+            tipo:'login',
+
+            usuario:usuario,
+            clave:clave
+        })
+    });
+
+    const data =
+    await resp.json();
+
+    if(data.ok){
+
+    localStorage.setItem(
+        'logueado',
+        'SI'
+    );
+
+    document.getElementById(
+    'loginBox').style.display =
+    'none';
+
+    document.getElementById(
+    'sistema').style.display =
+    'block';
+
+}else{
+
+        alert(
+        'Usuario o clave incorrectos'
+        );
+    }
 }
 
 </script>
-
-
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
