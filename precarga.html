@@ -220,21 +220,15 @@ flex-wrap:nowrap;
 /* ================= CONTAINER ================= */
 
 .container{
-
     padding:4px 8px;
-
 }
 
 .panel{
-
     display:none;
-
 }
 
 .panel.active{
-
-    display:block;
-
+    display:block !important;
 }
 
 /* ================= CARD ================= */
@@ -262,6 +256,7 @@ flex-wrap:nowrap;
 
 .form-grid{
     width:100%;
+
 }
 
 .full{
@@ -744,24 +739,38 @@ padding:0 6px;
 }
 
 .login-btn:hover{
-
     background:#15803d;
 }
 
 .login-macla{
-
     margin-top:20px;
-
     color:#cbd5e1;
-
     font-size:12px;
 }
 
 .login-macla-logo{
-
     width:90px;
-
     margin-top:8px;
+}
+
+#listaFiscales .item{
+    display:block !important;
+}
+
+#listaFiscales{
+    min-height:200px;
+}
+
+.container{
+    padding:4px 8px;
+}
+
+.panel{
+    display:none;
+}
+
+.panel.active{
+    display:block !important;
 }
 
 </style>
@@ -890,22 +899,10 @@ padding:0 6px;
     </button>
 
 <button
-class="sheet-btn"
-onclick="window.open('https://docs.google.com/spreadsheets/d/1bjEkhi_3uK2Fd49jylabYY3bF1l5ATl76cg8lQu5TgI/edit','_blank')">
-📊 Sheet
-</button>
-
-<button 
-class="tab mini-btn excel-btn"
-onclick="exportarExcel()">
-    📄 Excel
-</button>
-
-<button 
-class="tab mini-btn pdf-btn"
-onclick="exportarPDF()">
-    📑 PDF
-</button>
+    class="tab  btn logout-btn"
+    onclick="cerrarSesion()">
+        🚪 Cerrar sesión
+    </button>
 
 
 </div>
@@ -1016,14 +1013,29 @@ onclick="exportarPDF()">
         ✏️ Editar
     </button>
 
-    <button
-    class="btn logout-btn"
-    onclick="cerrarSesion()">
-        🚪 Cerrar sesión
-    </button>
+   </div>
 
+<div style="display:flex;gap:8px;">
+<button
+class="sheet-btn"
+onclick="window.open('https://docs.google.com/spreadsheets/d/1bjEkhi_3uK2Fd49jylabYY3bF1l5ATl76cg8lQu5TgI/edit','_blank')">
+📊 Sheet
+</button>
+
+<button 
+class="tab mini-btn excel-btn"
+onclick="exportarExcel()">
+    📄 Excel
+</button>
+
+<button 
+class="tab mini-btn pdf-btn"
+onclick="exportarPDF()">
+    📑 PDF
+</button>
 </div>
 
+</div>
 </div>
   
 
@@ -1032,12 +1044,11 @@ onclick="exportarPDF()">
     <div class="panel" id="fiscales">
 
         <div class="card">
-
             <div class="card-title">
                 Nuevo Fiscal
             </div>
 
-            <div class="form-grid">
+        <div class="form-grid">
 
                <input type="number"
 id="fisNum"
@@ -1068,17 +1079,30 @@ id="fisClave"
 placeholder="Clave">
 
             </div>
-            <button class="btn"
-            onclick="guardarFiscal()">
-                Guardar Fiscal
-            </button>
+
+            <div style="display:flex;gap:8px;">
+
+    <button
+    class="btn"
+    onclick="guardarFiscal()">
+        Guardar Fiscal
+    </button>
+
+    <button
+    class="btn editar-btn-main"
+    onclick="buscarFiscalEditar()">
+        ✏️ Editar
+    </button>
+
+</div>
+
         </div>
 
         <div class="lista"
         id="listaFiscales"></div>
-    </div> 
-    </div>
-</div>
+
+       </div> 
+   
 
 <!-- ================= FOOTER ================= -->
 <div class="footer">
@@ -1093,689 +1117,8 @@ placeholder="Clave">
 
 <script>
 
-const SHEET_URL =
-'https://script.google.com/macros/s/AKfycbyayWhy6qryKf4_iMhRy2VNmR9LQMz4bxj1PfAFuAgrwv9l6D_mncB29-wq1n0sht-T/exec';
+const SHEET_URL='https://script.google.com/macros/s/AKfycbyayWhy6qryKf4_iMhRy2VNmR9LQMz4bxj1PfAFuAgrwv9l6D_mncB29-wq1n0sht-T/exec';function showPanel(c,n){document['querySelectorAll']('.panel')['forEach'](r=>r['classList']['remove']('active'));document['querySelectorAll']('.tab')['forEach'](r=>r['classList']['remove']('active'));document['getElementById'](c)['classList']['add']('active');n['classList']['add']('active');}function cerrarSesion(){localStorage['removeItem']('logueado');document['getElementById']('usuarioLogin')['value']='';document['getElementById']('claveLogin')['value']='';document['getElementById']('sistema')['style']['display']='none';document['getElementById']('loginBox')['style']['display']='block';}let modoEdicion=![];let equipos=[];let fiscales=[];window['onload']=function(){if(localStorage['getItem']('logueado')==='SI'){document['getElementById']('loginBox')['style']['display']='none';document['getElementById']('sistema')['style']['display']='block';}cargarEquiposSheets();};function guardarEquipo(){const c=categoriaEquipo['value'];const n={'numero':embNumero['value'],'peña':embPeña['value'],'categoria':c,'timonel':embTimonel['value'],'cadete':esCadete['checked']?'SI':'NO','nombre_emb':nombreEmb['value'],'hp':hpEmb['value'],'matricula':matriculaEmb['value'],'pescador1':pescador1['value'],'dni1':dni1['value'],'pescador2':pescador2['value'],'dni2':dni2['value'],'pescador3':pescador3['value'],'dni3':dni3['value']};if(modoEdicion){actualizarEquipoSheets(n);}else{enviarEquipoSheets(n);}limpiarEquipo();}async function buscarEquipoEditar(){const c=prompt('Ingrese\x20N°\x20de\x20equipo\x20o\x20Nombre\x20de\x20embarcación');if(!c)return;const n=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'obtener_equipo_nombre','busqueda':c})});const r=await n['json']();console['log'](r);if(!r['ok']){alert('Equipo\x20no\x20encontrado');return;}const S=r['equipo'];embNumero['value']=S['numero']||'';embPeña['value']=S['peña']||'';embTimonel['value']=S['timonel']||'';nombreEmb['value']=S['nombre_emb']||'';hpEmb['value']=S['hp']||'';matriculaEmb['value']=S['matricula']||'';pescador1['value']=S['pescador1']||'';dni1['value']=S['dni1']||'';pescador2['value']=S['pescador2']||'';dni2['value']=S['dni2']||'';pescador3['value']=S['pescador3']||'';dni3['value']=S['dni3']||'';categoriaEquipo['value']=S['categoria']||'varones';esCadete['checked']=S['cadete']==='SI';modoEdicion=!![];alert('Equipo\x20cargado\x20para\x20editar');}function limpiarEquipo(){embNumero['value']='';embPeña['value']='';embTimonel['value']='';nombreEmb['value']='';hpEmb['value']='';matriculaEmb['value']='';pescador1['value']='';dni1['value']='';pescador2['value']='';dni2['value']='';pescador3['value']='';dni3['value']='';esCadete['checked']=![];categoriaEquipo['value']='varones';}function enviarEquipoSheets(c){fetch('https://script.google.com/macros/s/AKfycbyayWhy6qryKf4_iMhRy2VNmR9LQMz4bxj1PfAFuAgrwv9l6D_mncB29-wq1n0sht-T/exec',{'method':'POST','body':JSON['stringify']({'tipo':'equipo','numero':c['numero'],'peña':c['peña'],'categoria':c['categoria'],'timonel':c['timonel'],'pescador1':c['pescador1'],'dni1':c['dni1'],'pescador2':c['pescador2'],'dni2':c['dni2'],'pescador3':c['pescador3'],'dni3':c['dni3'],'cadete':c['cadete'],'nombre_emb':c['nombre_emb'],'hp':c['hp'],'matricula':c['matricula']})})['then'](n=>n['json']())['then'](n=>{console['log'](n);alert('Equipo\x20guardado');});}function actualizarEquipoSheets(c){fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'actualizar_equipo','numero':c['numero'],'peña':c['peña'],'categoria':c['categoria'],'timonel':c['timonel'],'pescador1':c['pescador1'],'dni1':c['dni1'],'pescador2':c['pescador2'],'dni2':c['dni2'],'pescador3':c['pescador3'],'dni3':c['dni3'],'cadete':c['cadete'],'nombre_emb':c['nombre_emb'],'hp':c['hp'],'matricula':c['matricula']})})['then'](n=>n['json']())['then'](n=>{console['log'](n);alert('Equipo\x20actualizado');modoEdicion=![];});}function renderEquipos(){return;}function guardarFiscal(){const c={'num':fisNum['value'],'zona':fisZona['value'],'fiscal1':fisFiscal1['value'],'fiscal2':fisFiscal2['value'],'fiscal3':fisFiscal3['value'],'usuario':fisUsuario['value'],'clave':fisClave['value']};const n=fiscales['findIndex'](r=>String(r['num'])===String(fisNum['value']));if(n>=0x0){fiscales[n]=c;}else{fiscales['push'](c);}if(modoEdicion){actualizarFiscalSheets(c);}else{enviarFiscalSheets(c);}limpiarFiscal();}function limpiarFiscal(){fisNum['value']='';fisZona['value']='';fisFiscal1['value']='';fisFiscal2['value']='';fisFiscal3['value']='';fisUsuario['value']='';fisClave['value']='';}function enviarFiscalSheets(c){fetch('https://script.google.com/macros/s/AKfycbyayWhy6qryKf4_iMhRy2VNmR9LQMz4bxj1PfAFuAgrwv9l6D_mncB29-wq1n0sht-T/exec',{'method':'POST','body':JSON['stringify']({'tipo':'fiscal','num':c['num'],'zona':c['zona'],'fiscal1':c['fiscal1'],'fiscal2':c['fiscal2'],'fiscal3':c['fiscal3'],'usuario':c['usuario'],'clave':c['clave']})})['then'](n=>n['json']())['then'](n=>{console['log'](n);alert('Fiscal\x20guardado');});}function actualizarFiscalSheets(c){fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'actualizar_fiscal','num':c['num'],'zona':c['zona'],'fiscal1':c['fiscal1'],'fiscal2':c['fiscal2'],'fiscal3':c['fiscal3'],'usuario':c['usuario'],'clave':c['clave']})})['then'](n=>n['json']())['then'](n=>{console['log'](n);alert('Fiscal\x20actualizado');modoEdicion=![];});}function renderFiscales(){listaFiscales['innerHTML']='';fiscales['forEach'](c=>{listaFiscales['innerHTML']+='\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22item\x22>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22item-top\x22>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22item-title\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20👤\x20Fiscal\x20'+c['num']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22item-sub\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Zona:\x20'+c['zona']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22item-sub\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+c['fiscal1']+'\x20/\x20'+c['fiscal2']+'\x20/\x20'+c['fiscal3']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22item-sub\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Usuario:\x20'+c['usuario']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20';});}function exportarExcel(){const c=equipos['map'](S=>({'Orden':S['orden'],'fecha_hora':S['fecha_hora'],'num_equipo':S['numero'],'peña':S['peña'],'categoria':S['categoria'],'timonel':S['timonel'],'pescador1':S['pescador1'],'dni1':S['dni1'],'pescador2':S['pescador2'],'dni2':S['dni2'],'pescador3':S['pescador3'],'dni3':S['dni3'],'cadete':S['cadete'],'nombre_emb':S['nombre_emb'],'hp':S['hp'],'matricula':S['matricula']}));console['log'](c);const n=XLSX['utils']['json_to_sheet'](c);const r=XLSX['utils']['book_new']();XLSX['utils']['book_append_sheet'](r,n,'Equipos');XLSX['writeFile'](r,'equipos-jaaukanigas-NUEVO.xlsx');}async function exportarPDF(){const {jsPDF:c}=window['jspdf'];const n=new c('landscape');n['setFontSize'](0x10);n['text']('Concurso\x20Pesca\x20Variada\x20JAAUKANIGAS',0xe,0x10);const r=equipos['map'](S=>[S['numero'],S['peña'],S['categoria'],S['timonel'],S['nombre_emb'],S['hp'],S['pescador1'],S['pescador2'],S['pescador3']]);n['autoTable']({'startY':0x19,'head':[['Equipo','Peña','Categoria','Timonel','Embarcación','HP','Pescador\x201','Pescador\x202','Pescador\x203']],'body':r});n['save']('equipos-jaaukanigas.pdf');}async function cambiarEstado(c){const n=confirm('¿Desactivar\x20equipo\x20'+c+'?');if(!n)return;const r=await fetch('https://script.google.com/macros/s/AKfycbyayWhy6qryKf4_iMhRy2VNmR9LQMz4bxj1PfAFuAgrwv9l6D_mncB29-wq1n0sht-T/exec',{'method':'POST','body':JSON['stringify']({'tipo':'cambiar_estado','numero':c,'estado':'NO'})});const S=await r['json']();if(S['ok']){alert('Equipo\x20desactivado');}}async function cargarEquiposSheets(){const c=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'listar_equipos'})});const n=await c['json']();if(!n['ok'])return;equipos=n['equipos'];}async function login(){const c=document['getElementById']('usuarioLogin')['value'];const n=document['getElementById']('claveLogin')['value'];const r=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'login','usuario':c,'clave':n})});const S=await r['json']();if(S['ok']){localStorage['setItem']('logueado','SI');document['getElementById']('loginBox')['style']['display']='none';document['getElementById']('sistema')['style']['display']='block';}else{alert('Usuario\x20o\x20clave\x20incorrectos');}}async function buscarFiscalEditar(){const c=prompt('Ingrese\x20N°\x20Fiscal');if(!c)return;const n=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'obtener_fiscal','numero':c})});const r=await n['json']();if(!r['ok']){alert('Fiscal\x20no\x20encontrado');return;}const S=r['fiscal'];fisNum['value']=S['num']||'';fisZona['value']=S['zona']||'';fisFiscal1['value']=S['fiscal1']||'';fisFiscal2['value']=S['fiscal2']||'';fisFiscal3['value']=S['fiscal3']||'';fisUsuario['value']=S['usuario']||'';fisClave['value']=S['clave']||'';modoEdicion=!![];alert('Fiscal\x20cargado\x20para\x20editar');}function editarFiscal(c){const n=fiscales['find'](r=>String(r['num'])===String(c));if(!n){alert('Fiscal\x20no\x20encontrado');return;}document['getElementById']('fisNum')['value']=n['num']||'';document['getElementById']('fisZona')['value']=n['zona']||'';document['getElementById']('fisFiscal1')['value']=n['fiscal1']||'';document['getElementById']('fisFiscal2')['value']=n['fiscal2']||'';document['getElementById']('fisFiscal3')['value']=n['fiscal3']||'';document['getElementById']('fisUsuario')['value']=n['usuario']||'';document['getElementById']('fisClave')['value']=n['clave']||'';}
 
-/* ================= TABS ================= */
-
-function showPanel(id,btn){
-
-    document.querySelectorAll('.panel')
-    .forEach(p=>p.classList.remove('active'));
-
-    document.querySelectorAll('.tab')
-    .forEach(t=>t.classList.remove('active'));
-
-    document.getElementById(id)
-    .classList.add('active');
-
-    btn.classList.add('active');
-}
-
-function cerrarSesion(){
-    localStorage.removeItem('logueado');
-    document.getElementById('usuarioLogin').value='';
-    document.getElementById('claveLogin').value='';
-    document.getElementById('sistema').style.display='none';
-    document.getElementById('loginBox').style.display='block';
-}
-
-/* ================= STORAGE ================= */
-
-let modoEdicion = false;
-
-let equipos = [];
-
-let fiscales =
-JSON.parse(localStorage.getItem('jaau_fiscales')) || [];
-
-window.onload = function(){
-    if(
-        localStorage.getItem('logueado')
-        === 'SI'
-    ){
-        document.getElementById('loginBox')
-        .style.display='none';
-
-        document.getElementById('sistema')
-        .style.display='block';
-    }
-    cargarEquiposSheets();
-};
-
-/* ================= EQUIPOS ================= */
-
-function guardarEquipo(){
-
-    const categoria =
-    categoriaEquipo.value;
-
-
-    const equipo = {
-
-        numero: embNumero.value,
-
-        peña: embPeña.value,
-
-        categoria: categoria,
-
-        timonel: embTimonel.value,
-
-        cadete: esCadete.checked ? 'SI' : 'NO',
-
-        nombre_emb: nombreEmb.value,
-
-        hp: hpEmb.value,
-
-        matricula: matriculaEmb.value,
-
-        pescador1: pescador1.value,
-        dni1: dni1.value,
-
-        pescador2: pescador2.value,
-        dni2: dni2.value,
-
-        pescador3: pescador3.value,
-        dni3: dni3.value
-    };
-      
- if(modoEdicion){
-
-    actualizarEquipoSheets(equipo);
-
-}else{
-
-    enviarEquipoSheets(equipo);
-}
-
-limpiarEquipo();
-}
-
-
-async function buscarEquipoEditar(){
-
-    const busqueda =
-    prompt(
-    'Ingrese N° de equipo o Nombre de embarcación'
-    );
-
-    if(!busqueda) return;
-
-    const resp =
-    await fetch(SHEET_URL,{
-
-        method:'POST',
-
-        body:JSON.stringify({
-
-            tipo:'obtener_equipo_nombre',
-
-            busqueda:busqueda
-
-        })
-
-    });
-
-    const data =
-    await resp.json();
-
-    console.log(data);
-
-    if(!data.ok){
-
-        alert('Equipo no encontrado');
-
-        return;
-
-    }
-
-    const e = data.equipo;
-
-    embNumero.value = e.numero || '';
-
-    embPeña.value = e.peña || '';
-
-    embTimonel.value = e.timonel || '';
-
-    nombreEmb.value = e.nombre_emb || '';
-
-    hpEmb.value = e.hp || '';
-
-    matriculaEmb.value = e.matricula || '';
-
-    pescador1.value = e.pescador1 || '';
-    dni1.value = e.dni1 || '';
-
-    pescador2.value = e.pescador2 || '';
-    dni2.value = e.dni2 || '';
-
-    pescador3.value = e.pescador3 || '';
-    dni3.value = e.dni3 || '';
-
-    categoriaEquipo.value =
-    e.categoria || 'varones';
-
-    esCadete.checked =
-    e.cadete === 'SI';
-
-    modoEdicion = true;
-
-    alert('Equipo cargado para editar');
-
-}
-
-/* ================= LIMPIAR EQUIPO ================= */
-
-function limpiarEquipo(){
-
-    embNumero.value = '';
-
-    embPeña.value = '';
-
-    embTimonel.value = '';
-
-    nombreEmb.value = '';
-
-    hpEmb.value = '';
-
-    matriculaEmb.value = '';
-
-    pescador1.value = '';
-    dni1.value = '';
-
-    pescador2.value = '';
-    dni2.value = '';
-
-    pescador3.value = '';
-    dni3.value = '';
-
-    esCadete.checked = false;
-
-    categoriaEquipo.value = 'varones';
-
-}
-
-/* ================= ENVIAR EQUIPO ================= */
-
-function enviarEquipoSheets(equipo){
-
-
-    fetch("https://script.google.com/macros/s/AKfycbyayWhy6qryKf4_iMhRy2VNmR9LQMz4bxj1PfAFuAgrwv9l6D_mncB29-wq1n0sht-T/exec",{
-
-        method:"POST",
-
-        body:JSON.stringify({
-
-            tipo:'equipo',
-
-            numero: equipo.numero,
-
-            peña: equipo.peña,
-
-            categoria: equipo.categoria,
-
-            timonel: equipo.timonel,
-
-            pescador1: equipo.pescador1,
-            dni1: equipo.dni1,
-
-            pescador2: equipo.pescador2,
-            dni2: equipo.dni2,
-
-            pescador3: equipo.pescador3,
-            dni3: equipo.dni3,
-
-            cadete: equipo.cadete,
-
-            nombre_emb: equipo.nombre_emb,
-
-            hp: equipo.hp,
-
-            matricula: equipo.matricula
-        })
-    })
-
-    .then(r => r.json())
-
-    .then(r => {
-
-        console.log(r);
-
-        alert('Equipo guardado');
-    });
-}
-
-
-function actualizarEquipoSheets(equipo){
-
-    fetch(SHEET_URL,{
-
-        method:"POST",
-
-        body:JSON.stringify({
-
-            tipo:'actualizar_equipo',
-
-            numero: equipo.numero,
-
-            peña: equipo.peña,
-
-            categoria: equipo.categoria,
-
-            timonel: equipo.timonel,
-
-            pescador1: equipo.pescador1,
-            dni1: equipo.dni1,
-
-            pescador2: equipo.pescador2,
-            dni2: equipo.dni2,
-
-            pescador3: equipo.pescador3,
-            dni3: equipo.dni3,
-
-            cadete: equipo.cadete,
-
-            nombre_emb: equipo.nombre_emb,
-
-            hp: equipo.hp,
-
-            matricula: equipo.matricula
-
-        })
-
-    })
-
-    .then(r=>r.json())
-
-    .then(r=>{
-
-        console.log(r);
-
-        alert('Equipo actualizado');
-
-        modoEdicion = false;
-
-    });
-
-}
-
-
-function renderEquipos(){
-    return;
-}
-
-
-
-/* ================= FISCALES ================= */
-
-function guardarFiscal(){
-
-    const fiscal = {
-
-    num: fisNum.value,
-    zona: fisZona.value,
-
-    fiscal1: fisFiscal1.value,
-    fiscal2: fisFiscal2.value,
-    fiscal3: fisFiscal3.value,
-
-    usuario: fisUsuario.value,
-    clave: fisClave.value
-
-};
-
-    fiscales.push(fiscal);
-
-    localStorage.setItem(
-    'jaau_fiscales',
-    JSON.stringify(fiscales)
-    );
-
-    renderFiscales();
-enviarFiscalSheets(fiscal);
-limpiarFiscal();
-}
-
-/* ================= LIMPIAR FISCAL ================= */
-
-function limpiarFiscal(){
-
-    fisNum.value = '';
-    fisZona.value = '';
-
-    fisFiscal1.value = '';
-    fisFiscal2.value = '';
-    fisFiscal3.value = '';
-
-    fisUsuario.value = '';
-    fisClave.value = '';
-
-}
-
-/* ================= ENVIAR FISCAL ================= */
-
-function enviarFiscalSheets(fiscal){
-
-    fetch("https://script.google.com/macros/s/AKfycbyayWhy6qryKf4_iMhRy2VNmR9LQMz4bxj1PfAFuAgrwv9l6D_mncB29-wq1n0sht-T/exec",{
-
-        method:"POST",
-
-        body:JSON.stringify({
-
-            tipo:'fiscal',
-
-            num:fiscal.num,
-            zona:fiscal.zona,
-
-            fiscal1:fiscal.fiscal1,
-            fiscal2:fiscal.fiscal2,
-            fiscal3:fiscal.fiscal3,
-
-            usuario:fiscal.usuario,
-            clave:fiscal.clave
-
-        })
-
-    })
-
-    .then(r=>r.json())
-    .then(r=>{
-
-        console.log(r);
-
-        alert('Fiscal guardado');
-
-    });
-
-}
-
-function renderFiscales(){
-
-    listaFiscales.innerHTML = '';
-
-    fiscales.forEach(f=>{
-
-        listaFiscales.innerHTML += `
-
-            <div class="item">
-
-                <div class="item-top">
-
-                    <div class="item-title">
-                        👤 Fiscal ${f.num}
-                    </div>
-
-                </div>
-
-                <div class="item-sub">
-                    Zona: ${f.zona}
-                </div>
-
-                <div class="item-sub">
-                    ${f.fiscal1} / ${f.fiscal2} / ${f.fiscal3}
-                </div>
-
-                <div class="item-sub">
-                    Usuario: ${f.usuario}
-                </div>
-
-            </div>
-
-        `;
-
-    });
-
-}
-
-/* ================= INIT ================= */
-
-//renderEquipos();
-renderFiscales();
-
-/* ================= EXPORTAR EXCEL ================= */
-
-function exportarExcel(){
-
-    const datos = equipos.map(e=>({
-Orden:e.orden,
-
-fecha_hora: e.fecha_hora,
-
-    num_equipo: e.numero,
-
-    peña: e.peña,
-
-    categoria: e.categoria,
-
-    timonel: e.timonel,
-
-    pescador1: e.pescador1,
-    dni1: e.dni1,
-
-    pescador2: e.pescador2,
-    dni2: e.dni2,
-
-    pescador3: e.pescador3,
-    dni3: e.dni3,
-
-    cadete: e.cadete,
-
-    nombre_emb: e.nombre_emb,
-
-    hp: e.hp,
-
-    matricula: e.matricula
-
-}));
-
-console.log(datos);
-
-    const ws =
-    XLSX.utils.json_to_sheet(datos);
-
-    const wb =
-    XLSX.utils.book_new();
-
-    XLSX.utils.book_append_sheet(
-        wb,
-        ws,
-        "Equipos"
-    );
-
-    XLSX.writeFile(
-        wb,
-        "equipos-jaaukanigas-NUEVO.xlsx"
-    );
-}
-
-/* ================= EXPORTAR PDF ================= */
-
-async function exportarPDF(){
-
-    const { jsPDF } = window.jspdf;
-
-    const doc =
-    new jsPDF('landscape');
-
-    doc.setFontSize(16);
-
-    doc.text(
-        'Concurso Pesca Variada JAAUKANIGAS',
-        14,
-        16
-    );
-
-    const filas =
-    equipos.map(e=>[
-
-        e.numero,
-
-        e.peña,
-
-        e.categoria,
-
-        e.timonel,
-
-        e.nombre_emb,
-
-        e.hp,
-
-        e.pescador1,
-
-        e.pescador2,
-
-        e.pescador3
-
-    ]);
-
-    doc.autoTable({
-
-        startY:25,
-
-        head:[[
-
-            'Equipo',
-
-            'Peña',
-
-            'Categoria',
-
-            'Timonel',
-
-            'Embarcación',
-
-            'HP',
-
-            'Pescador 1',
-
-            'Pescador 2',
-
-            'Pescador 3'
-
-        ]],
-
-        body:filas
-
-    });
-
-    doc.save(
-        'equipos-jaaukanigas.pdf'
-    );
-}
-
-
-async function cambiarEstado(numero){
-
-    const confirmar =
-    confirm(
-        '¿Desactivar equipo ' +
-        numero +
-        '?'
-    );
-
-    if(!confirmar) return;
-
-    const resp =
-    await fetch(
-        "https://script.google.com/macros/s/AKfycbyayWhy6qryKf4_iMhRy2VNmR9LQMz4bxj1PfAFuAgrwv9l6D_mncB29-wq1n0sht-T/exec",
-        {
-
-            method:"POST",
-
-            body:JSON.stringify({
-
-                tipo:"cambiar_estado",
-
-                numero:numero,
-
-                estado:"NO"
-            })
-        }
-    );
-
-    const data =
-    await resp.json();
-
-    if(data.ok){
-
-        alert(
-            "Equipo desactivado"
-        );
-    }
-}
-
-async function cargarEquiposSheets(){
-
-    const resp = await fetch(SHEET_URL,{
-
-        method:'POST',
-
-        body:JSON.stringify({
-
-            tipo:'listar_equipos'
-
-        })
-
-    });
-
-    const data =
-    await resp.json();
-
-    if(!data.ok) return;
-
-    equipos = data.equipos;
-
-    //renderEquipos();
-}
-
-async function login(){
-    const usuario =
-    document.getElementById(
-    'usuarioLogin').value;
-
-    const clave =
-    document.getElementById(
-    'claveLogin').value;
-
-    const resp =
-    await fetch(SHEET_URL,{
-
-        method:'POST',
-
-        body:JSON.stringify({
-
-            tipo:'login',
-
-            usuario:usuario,
-            clave:clave
-        })
-    });
-
-    const data =
-    await resp.json();
-
-    if(data.ok){
-
-    localStorage.setItem(
-        'logueado',
-        'SI'
-    );
-
-    document.getElementById(
-    'loginBox').style.display =
-    'none';
-
-    document.getElementById(
-    'sistema').style.display =
-    'block';
-
-}else{
-
-        alert(
-        'Usuario o clave incorrectos'
-        );
-    }
-}
 
 </script>
 
