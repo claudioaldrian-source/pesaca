@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Administrador JAAUKANIGAS</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#eef2f7;
+    color:#111827;
+}
+
+/* HEADER */
+.header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    background:white;
+    display:grid;
+    grid-template-columns:120px 1fr 120px;
+    align-items:center;
+    padding:2px 15px;
+    z-index:1000;
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+
+.header h1{
+    font-size:22px;
+line-height:1;
+    margin:0;
+}
+
+.header p{
+    font-size:13px;
+    color:green;
+margin:0;
+}
+
+.header-texto{
+    text-align:center;
+}
+
+.panel-vivo{
+    height:450px;
+    overflow:hidden;
+}
+
+.tabla-scroll{
+    height:380px;
+    overflow-y:auto;
+}
+
+/* RESUMEN */
+
+.resumen{
+    display:grid;
+    grid-template-columns:repeat(9,1fr);
+    gap:3px;
+    position:fixed;
+    top:115px;
+    left:0;
+    width:100%;
+    z-index:998;
+    padding:6px;
+    background:#eef2f7;
+}
+
+.card{
+    background:white;
+    border-radius:6px;
+    padding:2px;
+    text-align:center;
+    box-shadow:0 2px 6px rgba(0,0,0,.1);
+}
+
+.card-num{
+    font-size:14px;
+    font-weight:bold;
+    color:red;
+}
+
+.card-label{
+    font-size:10px;
+}
+
+/* CONTENIDO */
+
+.main{
+    display:block;
+    grid-template-columns:4fr 1fr;
+    gap:10px;
+    padding:10px;
+    margin-top:170px;
+}
+
+/* TABLA */
+
+.panel{
+    background:white;
+    border-radius:12px;
+    padding:10px;
+    box-shadow:0 2px 6px rgba(0,0,0,.1);
+}
+
+.panel-title{
+    font-size:16px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#15803d;
+    color:white;
+    padding:8px;
+    font-size:12px;
+}
+
+td{
+    padding:7px;
+    border-bottom:1px solid #e5e7eb;
+    font-size:12px;
+    text-align:center;
+}
+
+/* RANKING */
+
+.ranking-item{
+    display:flex;
+    justify-content:space-between;
+    padding:8px;
+    border-bottom:1px solid #e5e7eb;
+}
+
+/* PIEZAS MAYORES */
+
+.piezas{
+    margin:10px;
+}
+
+.pieza-row{
+    display:flex;
+    justify-content:space-between;
+    padding:8px;
+    border-bottom:1px solid #e5e7eb;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+    .resumen{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .main{
+        grid-template-columns:1fr;
+    }
+}
+
+.bloques-finales{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:10px;
+    margin:10px;
+}
+
+@media(max-width:900px){
+    .bloques-finales{
+        grid-template-columns:1fr;
+    }
+}
+
+.panel-vivo{
+    height:430px;
+    overflow:hidden;
+}
+
+.logo-admin{
+    height:60px;
+    margin:auto;
+    display:block;
+}
+
+.banner-vivo{
+    position:fixed;
+    top:82px;
+    left:0;
+    width:100%;
+    z-index:999;
+    background:#15803d;
+    color:white;
+    height:34px;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    white-space:nowrap;
+}
+
+.banner-texto{
+    display:inline-block;
+    padding-left:100%;
+    animation:scrollBanner 20s linear infinite;
+    font-weight:700;
+    font-size:13px;
+}
+
+@keyframes scrollBanner{
+
+    0%{
+        transform:translateX(0);
+    }
+
+    100%{
+        transform:translateX(-100%);
+    }
+
+}
+
+.macla-box{
+    margin-left:auto;
+
+    display:flex;
+    flex-direction:column;
+justify-content:center;
+    align-items:center;
+}
+
+.macla-text{
+    font-size:10px;
+    font-weight:700;
+    color:#6b7280;
+}
+
+.logo-macla{
+    height:55px;
+    
+}
+
+@media(max-width:900px){
+    .panel-vivo{
+        overflow-x:auto;
+    }
+    .tabla-scroll{
+        overflow-x:auto;
+    }
+    table{
+        min-width:1100px;
+    }
+}
+
+.panel-vivo{
+    width:100%;
+    overflow:hidden;
+}
+
+.tabla-scroll{
+    height:400px;
+    overflow-y:auto;
+    overflow-x:hidden;
+}
+
+thead th{
+    position:sticky;
+    top:0px;
+    z-index:15;
+
+    background:#15803d;
+    color:white;
+}
+
+table{
+    width:100%;
+    min-width:unset;
+}
+
+.panel-title{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:white;
+    padding:6px 0;
+}
+
+.card-num.fecha-hora{
+    font-size:19px;
+}
+
+.dashboard-bottom{
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:10px;
+    padding:10px;
+}
+
+.columna-derecha{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+@media(max-width:900px){
+    .dashboard-bottom{
+        grid-template-columns:1fr;
+    }
+}
+
+.panel-vivo{
+    height:500px;
+}
+
+#rankingGeneral{
+    height:420px;
+    overflow-y:auto;
+}
+
+#piezasMayores{
+    min-height:180px;
+}
+
+#rankingMujeres{
+    min-height:180px;
+}
+
+.card-btn{
+    cursor:pointer;
+    transition:.2s;
+}
+
+.card-btn:hover{
+    transform:scale(1.05);
+    background:#15803d;
+    color:white;
+}
+
+.main-ranking{
+    display:grid;
+    grid-template-columns: 50% 50%;
+    gap:10px;
+}
+
+#rankingGeneral{
+    background:#f0f9ff;
+    border-left:5px solid #0284c7;
+}
+
+#piezasMayores{
+    background:#f0fdf4;
+    border-left:5px solid #16a34a;
+}
+
+#rankingMujeres{
+    background:#fdf2f8;
+    border-left:5px solid #db2777;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+    <img src="logo-vari.png" class="logo-admin">
+
+    <div class="header-texto">
+        <h1>PANEL ADMINISTRADOR</h1>
+        <p>Concurso de Pesca Variada JAAUKANIGAS</p>
+    </div>
+
+<div class="macla-box">
+
+    <div class="macla-text">
+        Desarrollado por
+    </div>
+
+    <img
+    src="logo-macla.png"
+    class="logo-macla">
+</div>
+</div>
+
+<div class="banner-vivo">
+    <div class="banner-texto">
+
+        📡 FISCALIZACIÓN EN VIVO •
+        🏆 TOP 15 GENERAL •
+        👩 TOP 5 DAMAS •
+        🎣 CONCURSO DE PESCA VARIADA JAAUKANIGAS •
+        📡 FISCALIZACIÓN EN TIEMPO REAL • Por MACLA-IA 🤖
+    </div>
+</div>
+
+<!-- TARJETAS -->
+<div class="resumen">
+
+    <div class="card">
+        <div class="card-num" id="cardEquipos">0</div>
+        <div class="card-label">Embarcaciones</div>
+    </div>
+
+    <div class="card">
+        <div class="card-num" id="cardCapturas">0</div>
+        <div class="card-label">Capturas</div>
+    </div>
+
+    <div class="card">
+        <div class="card-num" id="cardEspecies">0</div>
+        <div class="card-label">Especies</div>
+    </div>
+
+    <div class="card">
+        <div class="card-num" id="cardFiscales">0</div>
+        <div class="card-label">Fiscales</div>
+    </div>
+
+    <div class="card">
+        <div class="card-num" id="cardMayor">0 cm</div>
+        <div class="card-label">Mayor Pieza</div>
+    </div>
+
+<div class="card card-btn" onclick="abrirSheet()">
+    <div class="card-num">📊</div>
+    <div class="card-label">SHEET</div>
+</div>
+
+<div class="card card-btn"
+onclick="cargarCapturas()">
+    <div class="card-num">🔄</div>
+    <div class="card-label">
+        ACTUALIZAR
+    </div>
+</div>
+
+<div class="card card-btn" onclick="exportarPDF()">
+    <div class="card-num">📄</div>
+    <div class="card-label">PDF</div>
+</div>
+
+<div class="card">
+    <div class="card-num" id="fechaHoraActual">
+        --/--/---- 00:00:00
+    </div>
+    <div class="card-label">
+        FECHA Y HORA
+    </div>
+</div>
+</div>
+
+<!-- FISCALIZACION -->
+
+<div class="main">
+
+    <div class="panel panel-vivo">
+
+        <div class="panel-title">
+            Fiscalización en Vivo
+        </div>
+
+        <div class="tabla-scroll">
+
+            <table>
+
+                <thead>
+       <tr>
+    <th>orden</th>
+    <th>fecha_hora</th>
+    <th>num_equipo</th>
+    <th>categoria</th>
+    <th>peña</th>
+    <th>pescadores</th>
+    <th>puntos</th>
+    <th>total_capturas</th>
+    <th>total_especies</th>
+    <th>fiscal</th>
+    <th>armado_gallego</th>
+    <th>pati</th>
+    <th>surubi_pinta</th>
+    <th>mandube_cuch</th>
+    <th>moncholo</th>
+        </tr>
+                </thead>
+
+                <tbody id="tablaCapturas">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- BLOQUES INFERIORES -->
+<div class="dashboard-bottom">
+
+    <!-- TOP 15 -->
+
+    <div class="panel">
+
+        <div class="panel-title">
+            🏆 TOP 15 GENERAL
+        </div>
+
+        <div id="rankingGeneral">
+        </div>
+    </div>
+
+    <!-- COLUMNA DERECHA -->
+    <div class="columna-derecha">
+
+        <div class="panel">
+
+            <div class="panel-title">
+                📏 PIEZAS MAYORES
+            </div>
+
+            <div id="piezasMayores">
+            </div>
+        </div>
+
+
+        <div class="panel">
+            <div class="panel-title">
+                👩 TOP 5 MUJERES
+            </div>
+            <div id="rankingMujeres">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+const SHEET_URL='https://script.google.com/macros/s/AKfycbyayWhy6qryKf4_iMhRy2VNmR9LQMz4bxj1PfAFuAgrwv9l6D_mncB29-wq1n0sht-T/exec';function actualizarFechaHora(){const a=new Date();const t=a['toLocaleDateString']('es-AR');const A=a['toLocaleTimeString']('es-AR',{'hour12':![]});const o=document['getElementById']('fechaHoraActual');if(o){o['innerHTML']=t+'<br>'+A;}}actualizarFechaHora();setInterval(actualizarFechaHora,0x3e8);function abrirSheet(){window['open']('https://docs.google.com/spreadsheets/d/1bjEkhi_3uK2Fd49jylabYY3bF1l5ATl76cg8lQu5TgI/edit','_blank');}function exportarExcel(){alert('Exportación\x20Excel\x20próximamente');}function exportarPDF(){window['print']();}async function cargarCapturas(){try{const a=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'listar_capturas_admin'})});const t=await a['json']();if(!t['ok'])return;let A='';t['capturas']['forEach'](o=>{const s=new Date(o['fecha_hora'])['toLocaleString']('es-AR',{'hour12':![]});A+='\x0a<tr>\x0a\x20\x20\x20\x20<td>'+o['orden']+'</td>\x0a\x20\x20\x20\x20<td>'+s+'</td>\x0a\x20\x20\x20\x20<td>'+o['equipo']+'</td>\x0a\x20\x20\x20\x20<td>'+o['categoria']+'</td>\x0a\x20\x20\x20\x20<td>'+o['peña']+'</td>\x0a\x20\x20\x20\x20<td>'+o['pescadores']+'</td>\x0a\x20\x20\x20\x20<td>'+o['puntos']+'</td>\x0a\x20\x20\x20\x20<td>'+o['total_capturas']+'</td>\x0a\x20\x20\x20\x20<td>'+o['total_especies']+'</td>\x0a\x20\x20\x20\x20<td>'+o['fiscal']+'</td>\x0a\x20\x20\x20\x20<td>'+(o['armado']||'')+'</td>\x0a\x20\x20\x20\x20<td>'+(o['pati']||'')+'</td>\x0a\x20\x20\x20\x20<td>'+(o['surubi']||'')+'</td>\x0a\x20\x20\x20\x20<td>'+(o['mandube']||'')+'</td>\x0a\x20\x20\x20\x20<td>'+(o['moncholo']||'')+'</td>\x0a</tr>\x0a';});document['getElementById']('tablaCapturas')['innerHTML']=A;}catch(o){console['error'](o);}}cargarResumen();cargarCapturas();cargarTop15();cargarTopMujeres();cargarPiezasMayores();setInterval(()=>{cargarResumen();cargarCapturas();cargarTop15();cargarTopMujeres();cargarPiezasMayores();},0x1388);async function cargarTop15(){const a=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'top15_general'})});const t=await a['json']();if(!t['ok'])return;let A='';t['ranking']['forEach']((o,s)=>{A+='\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22ranking-item\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>'+(s+0x1)+'°</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>EMB\x20'+o['equipo']+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>'+o['categoria']+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>'+o['peña']+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>'+o['pescadores']+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<strong>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+o['puntos']+'\x20pts\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</strong>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20';});document['getElementById']('rankingGeneral')['innerHTML']=A;}async function cargarTopMujeres(){const a=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'top5_mujeres'})});const t=await a['json']();if(!t['ok'])return;let A='';t['ranking']['forEach']((o,s)=>{A+='\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22ranking-item\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+(s+0x1)+'°\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</span>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20EMB\x20'+o['equipo']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</span>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+o['peña']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</span>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<strong>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+o['puntos']+'\x20pts\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</strong>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20';});document['getElementById']('rankingMujeres')['innerHTML']=A;}async function cargarPiezasMayores(){const a=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'piezas_mayores'})});const t=await a['json']();if(!t['ok'])return;let A='';t['piezas']['forEach'](o=>{A+='\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22pieza-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<strong>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+o['especie']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</strong>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+o['cm']+'\x20cm\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20EMB\x20'+o['equipo']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+o['peña']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+o['pescadores']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20';});document['getElementById']('piezasMayores')['innerHTML']=A;}async function cargarResumen(){const a=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'resumen_admin'})});const t=await a['json']();if(!t['ok'])return;document['getElementById']('cardEquipos')['textContent']=t['embarcaciones'];document['getElementById']('cardCapturas')['textContent']=t['capturas'];document['getElementById']('cardEspecies')['textContent']=t['especies'];document['getElementById']('cardFiscales')['textContent']=t['fiscales'];document['getElementById']('cardMayor')['textContent']=t['mayor_pieza'];}
+
+</script>
+
+</body>
+</html>
