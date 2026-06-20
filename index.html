@@ -498,7 +498,7 @@ flex:1;
     color:black;
     border-radius:8px;
     text-align:center;
-    padding:7px;
+    padding:2px 4px;
     min-height:25px;
 box-sizing:border-box;
     overflow:hidden;
@@ -506,20 +506,23 @@ box-sizing:border-box;
 
 .resumen-inline{
     display:flex;
+    flex-direction:column;
     align-items:center;
     justify-content:center;
-    gap:6px;
+    gap:0;
 }
 
 .resumen-num{
-    font-size:17px;
+    font-size:18px;
     font-weight:700;
+line-height:1;
 }
 
 .resumen-label{
     font-size:11px;
     color:black;
 font-weight:600;
+line-height:1;
 }
 
 .mini-input{
@@ -811,7 +814,7 @@ onclick="nuevaEmbarcacion()">
             <div class="resumen-inline">
                 <span class="resumen-num"
                 id="cantCapturas">0</span>
-                <span class="resumen-label">CAPT.</span>
+                <span class="resumen-label">CAPTURAS</span>
             </div>            
         </div>
 
@@ -819,7 +822,7 @@ onclick="nuevaEmbarcacion()">
             <div class="resumen-inline">
                 <span class="resumen-num"
                 id="cantEspecies">0</span>
-                <span class="resumen-label">ESPEC.</span>
+                <span class="resumen-label">ESPECIES</span>
             </div>        
         </div>
 <!-- DIGITAL BUTTON -->
