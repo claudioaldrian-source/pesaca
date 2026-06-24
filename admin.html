@@ -399,11 +399,73 @@ table{
     cursor:pointer;
 }
 
+.parpadeoTop{
+    animation: parpadeoTop 1s ease-in-out 3;
+}
+@keyframes parpadeoTop{
+    0%{
+        background:#fff;
+    }
+    50%{
+        background:#ffff00;
+    }
+    100%{
+        background:#fff;
+    }
+}
+
+.parpadeoPieza{
+    animation: parpadeoPieza 2s ease-in-out 3;
+}
+@keyframes parpadeoPieza{
+    0%{
+        background:white;
+    }
+    50%{
+        background:#7cff7c;
+        transform:scale(1.03);
+    }
+    100%{
+        background:white;
+        transform:scale(1);
+    }
+}
+
+.parpadeoMujeres{
+    animation: parpadeoMujeres 2s ease-in-out 3;
+}
+@keyframes parpadeoMujeres{
+    0%{
+        background:white;
+    }
+    50%{
+        background:#ffd6ec;
+        transform:scale(1.03);
+    }
+    100%{
+        background:white;
+        transform:scale(1);
+    }
+}
+
 </style>
 
 </head>
 
 <body>
+
+<audio id="sonidoTop15">
+  <source src="beep-15.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="sonidoPiezaMayor">
+    <source src="beep-pm.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="sonidoMujeres">
+    <source src="beep-muj.mp3" type="audio/mpeg">
+</audio>
+
 
 <div id="adminCompleto">
 
@@ -565,21 +627,20 @@ onclick="salirAdmin()">
 <div class="dashboard-bottom">
 
     <!-- TOP 15 -->
-
-    <div class="panel">
-
-        <div class="panel-title">
-            🏆 TOP 15 GENERAL
-        </div>
-
-        <div id="rankingGeneral">
-        </div>
+    <div
+    class="panel"
+    id="panelTop15">
+    <div class="panel-title">
+        🏆 TOP 15 GENERAL
     </div>
+    <div id="rankingGeneral">
+    </div>
+</div>
 
     <!-- COLUMNA DERECHA -->
     <div class="columna-derecha">
 
-        <div class="panel">
+        <div class="panel" id="panelPiezas">
 
             <div class="panel-title">
                 📏 PIEZAS MAYORES
@@ -590,7 +651,7 @@ onclick="salirAdmin()">
         </div>
 
 
-        <div class="panel">
+        <div class="panel" id="panelMujeres">
             <div class="panel-title">
                 👩 TOP 5 MUJERES
             </div>
@@ -602,7 +663,7 @@ onclick="salirAdmin()">
 
 <script>
 
-const SHEET_URL='https://script.google.com/macros/s/AKfycbyayWhy6qryKf4_iMhRy2VNmR9LQMz4bxj1PfAFuAgrwv9l6D_mncB29-wq1n0sht-T/exec';function actualizarFechaHora(){const d=new Date();const O=d['toLocaleDateString']('es-AR');const N=d['toLocaleTimeString']('es-AR',{'hour12':![]});const Z=document['getElementById']('fechaHoraActual');if(Z){Z['innerHTML']=O+'<br>'+N;}}actualizarFechaHora();setInterval(actualizarFechaHora,0x3e8);function abrirSheet(){window['open']('https://docs.google.com/spreadsheets/d/1bjEkhi_3uK2Fd49jylabYY3bF1l5ATl76cg8lQu5TgI/edit','_blank');}function exportarExcel(){alert('Exportación\x20Excel\x20próximamente');}function exportarPDF(){window['print']();}async function cargarCapturas(){try{const d=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'listar_capturas_admin'})});const O=await d['json']();if(!O['ok'])return;let N='';O['capturas']['forEach'](Z=>{const Q=new Date(Z['fecha_hora'])['toLocaleString']('es-AR',{'hour12':![]});N+='\x0a<tr>\x0a\x20\x20\x20\x20<td>'+Z['orden']+'</td>\x0a\x20\x20\x20\x20<td>'+Q+'</td>\x0a\x20\x20\x20\x20<td>'+Z['equipo']+'</td>\x0a\x20\x20\x20\x20<td>'+Z['categoria']+'</td>\x0a\x20\x20\x20\x20<td>'+Z['peña']+'</td>\x0a\x20\x20\x20\x20<td>'+Z['pescadores']+'</td>\x0a\x20\x20\x20\x20<td>'+Z['puntos']+'</td>\x0a\x20\x20\x20\x20<td>'+Z['total_capturas']+'</td>\x0a\x20\x20\x20\x20<td>'+Z['total_especies']+'</td>\x0a\x20\x20\x20\x20<td>'+Z['fiscal']+'</td>\x0a\x20\x20\x20\x20<td>'+(Z['armado']||'')+'</td>\x0a\x20\x20\x20\x20<td>'+(Z['pati']||'')+'</td>\x0a\x20\x20\x20\x20<td>'+(Z['surubi']||'')+'</td>\x0a\x20\x20\x20\x20<td>'+(Z['mandube']||'')+'</td>\x0a\x20\x20\x20\x20<td>'+(Z['moncholo']||'')+'</td>\x0a</tr>\x0a';});document['getElementById']('tablaCapturas')['innerHTML']=N;}catch(Z){console['error'](Z);}}cargarResumen();cargarCapturas();cargarTop15();cargarTopMujeres();cargarPiezasMayores();setInterval(()=>{cargarResumen();cargarCapturas();cargarTop15();cargarTopMujeres();cargarPiezasMayores();},0x1388);async function cargarTop15(){const d=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'top15_general'})});const O=await d['json']();if(!O['ok'])return;let N='';O['ranking']['forEach']((Z,Q)=>{N+='\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22ranking-item\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>'+(Q+0x1)+'°</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>EMB\x20'+Z['equipo']+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>'+Z['categoria']+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>'+Z['peña']+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>'+Z['pescadores']+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<strong>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+Z['puntos']+'\x20pts\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</strong>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20';});document['getElementById']('rankingGeneral')['innerHTML']=N;}async function cargarTopMujeres(){const d=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'top5_mujeres'})});const O=await d['json']();if(!O['ok'])return;let N='';O['ranking']['forEach']((Z,Q)=>{N+='\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22ranking-item\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+(Q+0x1)+'°\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</span>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20EMB\x20'+Z['equipo']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</span>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+Z['peña']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</span>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<strong>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+Z['puntos']+'\x20pts\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</strong>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20';});document['getElementById']('rankingMujeres')['innerHTML']=N;}async function cargarPiezasMayores(){const d=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'piezas_mayores'})});const O=await d['json']();if(!O['ok'])return;let N='';O['piezas']['forEach'](Z=>{N+='\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22pieza-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<strong>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+Z['especie']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</strong>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+Z['cm']+'\x20cm\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20EMB\x20'+Z['equipo']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+Z['peña']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+Z['pescadores']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20';});document['getElementById']('piezasMayores')['innerHTML']=N;}async function cargarResumen(){const d=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'resumen_admin'})});const O=await d['json']();if(!O['ok'])return;document['getElementById']('cardEquipos')['textContent']=O['embarcaciones'];document['getElementById']('cardCapturas')['textContent']=O['capturas'];document['getElementById']('cardEspecies')['textContent']=O['especies'];document['getElementById']('cardFiscales')['textContent']=O['fiscales'];document['getElementById']('cardMayor')['textContent']=O['mayor_pieza'];}async function loginAdmin(){try{const d=document['getElementById']('usuario')['value'];const O=document['getElementById']('clave')['value'];console['log']('Usuario:',d);console['log']('Clave:',O);const N=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'login','usuario':d,'clave':O})});const Z=await N['json']();console['log']('Respuesta:',Z);if(Z['ok']&&Z['rol']==='admin'){localStorage['setItem']('admin_login','SI');location['reload']();}else{alert('Acceso\x20denegado');}}catch(Q){console['error']('ERROR\x20LOGIN:',Q);}}if(localStorage['getItem']('admin_login')==='SI'){document['getElementById']('loginBox')['style']['display']='none';}else{document['getElementById']('loginBox')['style']['display']='flex';}function salirAdmin(){if(confirm('¿Cerrar\x20sesión\x20del\x20administrador?')){localStorage['removeItem']('admin_login');location['reload']();}}
+let ultimoTop15='';let ultimasPiezas='';let ultimoTopMujeres='';const SHEET_URL='https://script.google.com/macros/s/AKfycbyayWhy6qryKf4_iMhRy2VNmR9LQMz4bxj1PfAFuAgrwv9l6D_mncB29-wq1n0sht-T/exec';function actualizarFechaHora(){const i=new Date();const P=i['toLocaleDateString']('es-AR');const l=i['toLocaleTimeString']('es-AR',{'hour12':![]});const q=document['getElementById']('fechaHoraActual');if(q){q['innerHTML']=P+'<br>'+l;}}actualizarFechaHora();setInterval(actualizarFechaHora,0x3e8);function abrirSheet(){window['open']('https://docs.google.com/spreadsheets/d/1bjEkhi_3uK2Fd49jylabYY3bF1l5ATl76cg8lQu5TgI/edit','_blank');}function exportarExcel(){alert('Exportación\x20Excel\x20próximamente');}function exportarPDF(){window['print']();}async function cargarCapturas(){try{const i=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'listar_capturas_admin'})});const P=await i['json']();if(!P['ok'])return;let l='';P['capturas']['forEach'](q=>{const F=new Date(q['fecha_hora'])['toLocaleString']('es-AR',{'hour12':![]});l+='\x0a<tr>\x0a\x20\x20\x20\x20<td>'+q['orden']+'</td>\x0a\x20\x20\x20\x20<td>'+F+'</td>\x0a\x20\x20\x20\x20<td>'+q['equipo']+'</td>\x0a\x20\x20\x20\x20<td>'+q['categoria']+'</td>\x0a\x20\x20\x20\x20<td>'+q['peña']+'</td>\x0a\x20\x20\x20\x20<td>'+q['pescadores']+'</td>\x0a\x20\x20\x20\x20<td>'+q['puntos']+'</td>\x0a\x20\x20\x20\x20<td>'+q['total_capturas']+'</td>\x0a\x20\x20\x20\x20<td>'+q['total_especies']+'</td>\x0a\x20\x20\x20\x20<td>'+q['fiscal']+'</td>\x0a\x20\x20\x20\x20<td>'+(q['armado']||'')+'</td>\x0a\x20\x20\x20\x20<td>'+(q['pati']||'')+'</td>\x0a\x20\x20\x20\x20<td>'+(q['surubi']||'')+'</td>\x0a\x20\x20\x20\x20<td>'+(q['mandube']||'')+'</td>\x0a\x20\x20\x20\x20<td>'+(q['moncholo']||'')+'</td>\x0a</tr>\x0a';});document['getElementById']('tablaCapturas')['innerHTML']=l;}catch(q){console['error'](q);}}cargarResumen();cargarCapturas();cargarTop15();cargarTopMujeres();cargarPiezasMayores();setInterval(()=>{cargarResumen();cargarCapturas();cargarTop15();cargarTopMujeres();cargarPiezasMayores();},0x1388);async function cargarTop15(){const i=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'top15_general'})});const P=await i['json']();if(!P['ok'])return;let l='';P['ranking']['forEach']((F,O)=>{l+='\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22ranking-item\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>'+(O+0x1)+'°</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>EMB\x20'+F['equipo']+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>'+F['categoria']+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>'+F['peña']+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>'+F['pescadores']+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<strong>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+F['puntos']+'\x20pts\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</strong>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20';});document['getElementById']('rankingGeneral')['innerHTML']=l;const q=JSON['stringify'](P['ranking']);if(ultimoTop15!==''&&ultimoTop15!==q){document['getElementById']('sonidoTop15')?.['play']();document['getElementById']('panelTop15')?.['classList']['add']('parpadeoTop');setTimeout(()=>{document['getElementById']('panelTop15')?.['classList']['remove']('parpadeoTop');},0xbb8);}ultimoTop15=q;}async function cargarTopMujeres(){const i=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'top5_mujeres'})});const P=await i['json']();if(!P['ok'])return;let l='';P['ranking']['forEach']((F,O)=>{l+='\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22ranking-item\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+(O+0x1)+'°\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</span>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20EMB\x20'+F['equipo']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</span>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+F['peña']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</span>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<strong>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+F['puntos']+'\x20pts\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</strong>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20';});document['getElementById']('rankingMujeres')['innerHTML']=l;const q=JSON['stringify'](P['ranking']);if(ultimoTopMujeres!==''&&ultimoTopMujeres!==q){document['getElementById']('sonidoMujeres')?.['play']();document['getElementById']('panelMujeres')?.['classList']['add']('parpadeoMujeres');setTimeout(()=>{document['getElementById']('panelMujeres')?.['classList']['remove']('parpadeoMujeres');},0xfa0);}ultimoTopMujeres=q;}async function cargarPiezasMayores(){const i=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'piezas_mayores'})});const P=await i['json']();if(!P['ok'])return;let l='';P['piezas']['forEach'](F=>{l+='\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22pieza-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<strong>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+F['especie']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</strong>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+F['cm']+'\x20cm\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20EMB\x20'+F['equipo']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+F['peña']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+F['pescadores']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20';});document['getElementById']('piezasMayores')['innerHTML']=l;const q=JSON['stringify'](P['piezas']);if(ultimasPiezas!==''&&ultimasPiezas!==q){document['getElementById']('sonidoPiezaMayor')?.['play']();document['getElementById']('panelPiezas')?.['classList']['add']('parpadeoPieza');setTimeout(()=>{document['getElementById']('panelPiezas')?.['classList']['remove']('parpadeoPieza');},0xfa0);}ultimasPiezas=q;}async function cargarResumen(){const i=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'resumen_admin'})});const P=await i['json']();if(!P['ok'])return;document['getElementById']('cardEquipos')['textContent']=P['embarcaciones'];document['getElementById']('cardCapturas')['textContent']=P['capturas'];document['getElementById']('cardEspecies')['textContent']=P['especies'];document['getElementById']('cardFiscales')['textContent']=P['fiscales'];document['getElementById']('cardMayor')['textContent']=P['mayor_pieza'];}async function loginAdmin(){try{const i=document['getElementById']('usuario')['value'];const P=document['getElementById']('clave')['value'];console['log']('Usuario:',i);console['log']('Clave:',P);const l=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'login','usuario':i,'clave':P})});const q=await l['json']();console['log']('Respuesta:',q);if(q['ok']&&q['rol']==='admin'){localStorage['setItem']('admin_login','SI');location['reload']();}else{alert('Acceso\x20denegado');}}catch(F){console['error']('ERROR\x20LOGIN:',F);}}if(localStorage['getItem']('admin_login')==='SI'){document['getElementById']('loginBox')['style']['display']='none';}else{document['getElementById']('loginBox')['style']['display']='flex';}function salirAdmin(){if(confirm('¿Cerrar\x20sesión\x20del\x20administrador?')){localStorage['removeItem']('admin_login');location['reload']();}}
 
 
 </script>
