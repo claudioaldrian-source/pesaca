@@ -3,682 +3,97 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Administrador JAAUKANIGAS</title>
+<title>En Mantenimiento</title>
 
 <style>
-
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial,sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-    background:#eef2f7;
-    color:#111827;
-}
-
-/* HEADER */
-.header{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    background:white;
-    display:grid;
-    grid-template-columns:120px 1fr 120px;
+    background:#0d1117;
+    color:#fff;
+    height:100vh;
+    display:flex;
+    justify-content:center;
     align-items:center;
-    padding:2px 15px;
-    z-index:1000;
-    box-shadow:0 2px 8px rgba(0,0,0,.1);
-}
-
-.header h1{
-    font-size:22px;
-line-height:1;
-    margin:0;
-}
-
-.header p{
-    font-size:13px;
-    color:green;
-margin:0;
-}
-
-.header-texto{
     text-align:center;
-}
-
-.panel-vivo{
-    height:450px;
-    overflow:hidden;
-}
-
-.tabla-scroll{
-    height:380px;
-    overflow-y:auto;
-}
-
-/* RESUMEN */
-
-.resumen{
-    display:grid;
-    grid-template-columns:repeat(10,1fr);
-    gap:3px;
-    position:fixed;
-    top:115px;
-    left:0;
-    width:100%;
-    z-index:998;
-    padding:6px;
-    background:#eef2f7;
+    padding:20px;
 }
 
 .card{
-    background:white;
-    border-radius:6px;
-    padding:2px;
-    text-align:center;
-    box-shadow:0 2px 6px rgba(0,0,0,.1);
+    max-width:700px;
+    background:blue;
+    border:2px solid #1f6feb;
+    border-radius:20px;
+    padding:40px;
+    box-shadow:0 0 30px rgba(31,111,235,.35);
 }
 
-.card-num{
-    font-size:14px;
-    font-weight:bold;
-    color:red;
+.logo{
+    font-size:70px;
+    margin-bottom:20px;
+    animation:pulse 2s infinite;
 }
 
-.card-label{
-    font-size:10px;
+h1{
+    font-size:38px;
+    margin-bottom:20px;
+    color:#58a6ff;
 }
 
-/* CONTENIDO */
-
-.main{
-    display:block;
-    grid-template-columns:4fr 1fr;
-    gap:10px;
-    padding:10px;
-    margin-top:170px;
+p{
+    font-size:20px;
+    line-height:1.6;
+    color:#c9d1d9;
 }
 
-/* TABLA */
-
-.panel{
-    background:white;
-    border-radius:12px;
-    padding:10px;
-    box-shadow:0 2px 6px rgba(0,0,0,.1);
+.aviso{
+    margin-top:30px;
+    font-size:18px;
+    color:#ffd33d;
+    animation:blink 1s infinite;
 }
 
-.panel-title{
-    font-size:16px;
-    font-weight:bold;
-    margin-bottom:10px;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-}
-
-th{
-    background:#15803d;
-    color:white;
-    padding:8px;
-    font-size:12px;
-}
-
-td{
-    padding:7px;
-    border-bottom:1px solid #e5e7eb;
-    font-size:12px;
-    text-align:center;
-}
-
-/* RANKING */
-
-.ranking-item{
-    display:flex;
-    justify-content:space-between;
-    padding:8px;
-    border-bottom:1px solid #e5e7eb;
-}
-
-/* PIEZAS MAYORES */
-
-.piezas{
-    margin:10px;
-}
-
-.pieza-row{
-    display:flex;
-    justify-content:space-between;
-    padding:8px;
-    border-bottom:1px solid #e5e7eb;
-}
-
-/* RESPONSIVE */
-
-@media(max-width:900px){
-
-    .resumen{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .main{
-        grid-template-columns:1fr;
-    }
-}
-
-.bloques-finales{
-    display:grid;
-    grid-template-columns:2fr 1fr;
-    gap:10px;
-    margin:10px;
-}
-
-@media(max-width:900px){
-    .bloques-finales{
-        grid-template-columns:1fr;
-    }
-}
-
-.panel-vivo{
-    height:430px;
-    overflow:hidden;
-}
-
-.logo-admin{
-    height:60px;
-    margin:auto;
-    display:block;
-}
-
-.banner-vivo{
-    position:fixed;
-    top:82px;
-    left:0;
-    width:100%;
-    z-index:999;
-    background:#15803d;
-    color:white;
-    height:34px;
-    overflow:hidden;
-    display:flex;
-    align-items:center;
-    white-space:nowrap;
-}
-
-.banner-texto{
-    display:inline-block;
-    padding-left:100%;
-    animation:scrollBanner 20s linear infinite;
-    font-weight:700;
-    font-size:13px;
-}
-
-@keyframes scrollBanner{
-
-    0%{
-        transform:translateX(0);
-    }
-
-    100%{
-        transform:translateX(-100%);
-    }
-
-}
-
-.macla-box{
-    margin-left:auto;
-
-    display:flex;
-    flex-direction:column;
-justify-content:center;
-    align-items:center;
-}
-
-.macla-text{
-    font-size:10px;
-    font-weight:700;
-    color:#6b7280;
-}
-
-.logo-macla{
-    height:55px;
-    
-}
-
-@media(max-width:900px){
-    .panel-vivo{
-        overflow-x:auto;
-    }
-    .tabla-scroll{
-        overflow-x:auto;
-    }
-    table{
-        min-width:1100px;
-    }
-}
-
-.panel-vivo{
-    width:100%;
-    overflow:hidden;
-}
-
-.tabla-scroll{
-    height:400px;
-    overflow-y:auto;
-    overflow-x:hidden;
-}
-
-thead th{
-    position:sticky;
-    top:0px;
-    z-index:15;
-
-    background:#15803d;
-    color:white;
-}
-
-table{
-    width:100%;
-    min-width:unset;
-}
-
-.panel-title{
-    position:sticky;
-    top:0;
-    z-index:20;
-    background:white;
-    padding:6px 0;
-}
-
-.card-num.fecha-hora{
-    font-size:19px;
-}
-
-.dashboard-bottom{
-    display:grid;
-    grid-template-columns:1.4fr 1fr;
-    gap:10px;
-    padding:10px;
-}
-
-.columna-derecha{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-}
-
-@media(max-width:900px){
-    .dashboard-bottom{
-        grid-template-columns:1fr;
-    }
-}
-
-.panel-vivo{
-    height:500px;
-}
-
-#rankingGeneral{
-    height:420px;
-    overflow-y:auto;
-}
-
-#piezasMayores{
-    min-height:180px;
-}
-
-#rankingMujeres{
-    min-height:180px;
-}
-
-.card-btn{
-    cursor:pointer;
-    transition:.2s;
-}
-
-.card-btn:hover{
-    transform:scale(1.05);
-    background:#15803d;
-    color:white;
-}
-
-.main-ranking{
-    display:grid;
-    grid-template-columns: 50% 50%;
-    gap:10px;
-}
-
-#rankingGeneral{
-    background:#f0f9ff;
-    border-left:5px solid #0284c7;
-}
-
-#piezasMayores{
-    background:#f0fdf4;
-    border-left:5px solid #16a34a;
-}
-
-#rankingMujeres{
-    background:#fdf2f8;
-    border-left:5px solid #db2777;
-}
-
-.login-box{
-    position:fixed;
-    inset:0;
-    background:green;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    gap:10px;
-    z-index:99999;
-}
-
-.login-box input{
-    width:250px;
-    padding:10px;
-    border:none;
-    border-radius:6px;
-}
-
-.login-box button{
-    width:250px;
-    padding:10px;
-    border:none;
-    border-radius:6px;
-    background:#15803d;
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.parpadeoTop{
-    animation: parpadeoTop 1s ease-in-out 3;
-}
-@keyframes parpadeoTop{
-    0%{
-        background:#fff;
-    }
+@keyframes pulse{
     50%{
-        background:#ffff00;
-    }
-    100%{
-        background:#fff;
+        transform:scale(1.1);
     }
 }
 
-.parpadeoPieza{
-    animation: parpadeoPieza 2s ease-in-out 3;
-}
-@keyframes parpadeoPieza{
-    0%{
-        background:white;
-    }
+@keyframes blink{
     50%{
-        background:#7cff7c;
-        transform:scale(1.03);
-    }
-    100%{
-        background:white;
-        transform:scale(1);
+        opacity:.3;
     }
 }
-
-.parpadeoMujeres{
-    animation: parpadeoMujeres 2s ease-in-out 3;
-}
-@keyframes parpadeoMujeres{
-    0%{
-        background:white;
-    }
-    50%{
-        background:#ffd6ec;
-        transform:scale(1.03);
-    }
-    100%{
-        background:white;
-        transform:scale(1);
-    }
-}
-
 </style>
-
 </head>
 
 <body>
 
-<audio id="sonidoTop15">
-  <source src="beep-15.mp3" type="audio/mpeg">
-</audio>
-
-<audio id="sonidoPiezaMayor">
-    <source src="beep-pm.mp3" type="audio/mpeg">
-</audio>
-
-<audio id="sonidoMujeres">
-    <source src="beep-muj.mp3" type="audio/mpeg">
-</audio>
-
-
-<div id="adminCompleto">
-
-<div class="header">
-
-<div id="loginBox" class="login-box">
-<h2>🔐 Acceso Administrador</h2>
-<input
-id="usuario"
-placeholder="Usuario">
-<input
-id="clave"
-type="password"
-placeholder="Clave">
-<button onclick="loginAdmin()">
-Ingresar
-</button>
-</div>
-
-    <img src="logo-vari.png" class="logo-admin">
-
-    <div class="header-texto">
-        <h1>PANEL ADMINISTRADOR</h1>
-        <p>Concurso de Pesca Variada JAAUKANIGAS</p>
-    </div>
-
-<div class="macla-box">
-
-    <div class="macla-text">
-        Desarrollado por
-    </div>
-
-    <img
-    src="logo-macla.png"
-    class="logo-macla">
-</div>
-</div>
-
-<div class="banner-vivo">
-    <div class="banner-texto">
-
-        📡 FISCALIZACIÓN EN VIVO •
-        🏆 TOP 15 GENERAL •
-        👩 TOP 5 DAMAS •
-        🎣 CONCURSO DE PESCA VARIADA JAAUKANIGAS •
-        📡 FISCALIZACIÓN EN TIEMPO REAL • Por MACLA-IA 🤖
-    </div>
-</div>
-
-<!-- TARJETAS -->
-<div class="resumen">
-
-    <div class="card">
-        <div class="card-num" id="cardEquipos">0</div>
-        <div class="card-label">Embarcaciones</div>
-    </div>
-
-    <div class="card">
-        <div class="card-num" id="cardCapturas">0</div>
-        <div class="card-label">Capturas</div>
-    </div>
-
-    <div class="card">
-        <div class="card-num" id="cardEspecies">0</div>
-        <div class="card-label">Especies</div>
-    </div>
-
-    <div class="card">
-        <div class="card-num" id="cardFiscales">0</div>
-        <div class="card-label">Fiscales</div>
-    </div>
-
-    <div class="card">
-        <div class="card-num" id="cardMayor">0 cm</div>
-        <div class="card-label">Mayor Pieza</div>
-    </div>
-
-<a
-  class="card card-btn"
-  href="https://docs.google.com/spreadsheets/d/1bjEkhi_3uK2Fd49jylabYY3bF1l5ATl76cg8lQu5TgI/edit"
-  target="_blank"
-  rel="noopener"
-  style="
-      text-decoration:none;
-      color:inherit;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-  "
->
-    <div class="card-num">📊</div>
-    <div class="card-label">SHEET</div>
-</a>
-
-<div class="card card-btn"
-onclick="cargarCapturas()">
-    <div class="card-num">🔄</div>
-    <div class="card-label">
-        ACTUALIZAR
-    </div>
-</div>
-
-<div class="card card-btn" onclick="exportarPDF()">
-    <div class="card-num">📄</div>
-    <div class="card-label">PDF</div>
-</div>
-
 <div class="card">
-    <div class="card-num" id="fechaHoraActual">
-        --/--/---- 00:00:00
+
+    <div class="logo">🚧</div>
+
+    <h1>Página ADMIN en Reforma</h1>
+
+    <p>
+        El sistema ADMINISTRADOR del Concurso de Pesca Variada JAAUKANIGAS
+        se encuentra en mantenimiento y actualización.
+    </p>
+
+    <p style="margin-top:15px;">
+        Disculpe las molestias.
+    </p>
+
+    <div class="aviso">
+        ⚠️ Plataforma temporalmente fuera de servicio ⚠️
     </div>
-    <div class="card-label">
-        FECHA Y HORA
-    </div>
+
 </div>
 
-<div class="card card-btn"
-onclick="salirAdmin()">
-    <div class="card-num">
-        🚪
-    </div>
-    <div class="card-label">
-        CERRAR SESIÓN
-    </div>
-</div>
-
-</div>
-
-<!-- FISCALIZACION -->
-
-<div class="main">
-
-    <div class="panel panel-vivo">
-
-        <div class="panel-title">
-            Fiscalización en Vivo
-        </div>
-
-        <div class="tabla-scroll">
-
-            <table>
-
-                <thead>
-       <tr>
-    <th>orden</th>
-    <th>fecha_hora</th>
-    <th>num_equipo</th>
-    <th>categoria</th>
-    <th>peña</th>
-    <th>pescadores</th>
-    <th>puntos</th>
-    <th>total_capturas</th>
-    <th>total_especies</th>
-    <th>fiscal</th>
-    <th>armado_gallego</th>
-    <th>pati</th>
-    <th>surubi_pinta</th>
-    <th>mandube_cuch</th>
-    <th>moncholo</th>
-        </tr>
-                </thead>
-
-                <tbody id="tablaCapturas">
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-
-<!-- BLOQUES INFERIORES -->
-<div class="dashboard-bottom">
-
-    <!-- TOP 15 -->
-    <div
-    class="panel"
-    id="panelTop15">
-    <div class="panel-title">
-        🏆 TOP 15 GENERAL
-    </div>
-    <div id="rankingGeneral">
-    </div>
-</div>
-
-    <!-- COLUMNA DERECHA -->
-    <div class="columna-derecha">
-
-        <div class="panel" id="panelPiezas">
-
-            <div class="panel-title">
-                📏 PIEZAS MAYORES
-            </div>
-
-            <div id="piezasMayores">
-            </div>
-        </div>
-
-
-        <div class="panel" id="panelMujeres">
-            <div class="panel-title">
-                👩 TOP 5 MUJERES
-            </div>
-            <div id="rankingMujeres">
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-
-let ultimoTop15='';let ultimasPiezas='';let ultimoTopMujeres='';const SHEET_URL='https://script.google.com/macros/s/AKfycbyayWhy6qryKf4_iMhRy2VNmR9LQMz4bxj1PfAFuAgrwv9l6D_mncB29-wq1n0sht-T/exec';function actualizarFechaHora(){const D=new Date();const C=D['toLocaleDateString']('es-AR');const a=D['toLocaleTimeString']('es-AR',{'hour12':![]});const l=document['getElementById']('fechaHoraActual');if(l){l['innerHTML']=C+'<br>'+a;}}actualizarFechaHora();setInterval(actualizarFechaHora,0x3e8);function abrirSheet(){window['open']('https://docs.google.com/spreadsheets/d/1bjEkhi_3uK2Fd49jylabYY3bF1l5ATl76cg8lQu5TgI/edit','_blank');}function exportarExcel(){alert('Exportación\x20Excel\x20próximamente');}function exportarPDF(){window['print']();}async function cargarCapturas(){try{const D=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'listar_capturas_admin'})});const C=await D['json']();if(!C['ok'])return;let a='';C['capturas']['forEach'](l=>{const r=new Date(l['fecha_hora'])['toLocaleString']('es-AR',{'hour12':![]});a+='\x0a<tr>\x0a\x20\x20\x20\x20<td>'+l['orden']+'</td>\x0a\x20\x20\x20\x20<td>'+r+'</td>\x0a\x20\x20\x20\x20<td>'+l['equipo']+'</td>\x0a\x20\x20\x20\x20<td>'+l['categoria']+'</td>\x0a\x20\x20\x20\x20<td>'+l['peña']+'</td>\x0a\x20\x20\x20\x20<td>'+l['pescadores']+'</td>\x0a\x20\x20\x20\x20<td>'+l['puntos']+'</td>\x0a\x20\x20\x20\x20<td>'+l['total_capturas']+'</td>\x0a\x20\x20\x20\x20<td>'+l['total_especies']+'</td>\x0a\x20\x20\x20\x20<td>'+l['fiscal']+'</td>\x0a\x20\x20\x20\x20<td>'+(l['armado']||'')+'</td>\x0a\x20\x20\x20\x20<td>'+(l['pati']||'')+'</td>\x0a\x20\x20\x20\x20<td>'+(l['surubi']||'')+'</td>\x0a\x20\x20\x20\x20<td>'+(l['mandube']||'')+'</td>\x0a\x20\x20\x20\x20<td>'+(l['moncholo']||'')+'</td>\x0a</tr>\x0a';});document['getElementById']('tablaCapturas')['innerHTML']=a;}catch(l){console['error'](l);}}cargarResumen();cargarCapturas();cargarTop15();cargarTopMujeres();cargarPiezasMayores();setInterval(()=>{cargarResumen();cargarCapturas();cargarTop15();cargarTopMujeres();cargarPiezasMayores();},0x1388);async function cargarTop15(){const D=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'top15_general'})});const C=await D['json']();if(!C['ok'])return;let a='';C['ranking']['forEach']((r,u)=>{a+='\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22ranking-item\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>'+(u+0x1)+'°</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>EMB\x20'+r['equipo']+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>'+r['categoria']+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>'+r['peña']+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>'+r['pescadores']+'</span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<strong>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+r['puntos']+'\x20pts\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</strong>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20';});document['getElementById']('rankingGeneral')['innerHTML']=a;const l=JSON['stringify'](C['ranking']);if(ultimoTop15!==''&&ultimoTop15!==l){document['getElementById']('sonidoTop15')?.['play']();document['getElementById']('panelTop15')?.['classList']['add']('parpadeoTop');setTimeout(()=>{document['getElementById']('panelTop15')?.['classList']['remove']('parpadeoTop');},0xbb8);}ultimoTop15=l;}async function cargarTopMujeres(){const D=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'top5_mujeres'})});const C=await D['json']();if(!C['ok'])return;let a='';C['ranking']['forEach']((r,u)=>{a+='\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22ranking-item\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+(u+0x1)+'°\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</span>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20EMB\x20'+r['equipo']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</span>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<span>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+r['peña']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</span>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<strong>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+r['puntos']+'\x20pts\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</strong>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20';});document['getElementById']('rankingMujeres')['innerHTML']=a;const l=JSON['stringify'](C['ranking']);if(ultimoTopMujeres!==''&&ultimoTopMujeres!==l){document['getElementById']('sonidoMujeres')?.['play']();document['getElementById']('panelMujeres')?.['classList']['add']('parpadeoMujeres');setTimeout(()=>{document['getElementById']('panelMujeres')?.['classList']['remove']('parpadeoMujeres');},0xfa0);}ultimoTopMujeres=l;}async function cargarPiezasMayores(){const D=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'piezas_mayores'})});const C=await D['json']();if(!C['ok'])return;let a='';C['piezas']['forEach'](r=>{a+='\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22pieza-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<strong>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+r['especie']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</strong>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+r['cm']+'\x20cm\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20EMB\x20'+r['equipo']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+r['peña']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+r['pescadores']+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20';});document['getElementById']('piezasMayores')['innerHTML']=a;const l=JSON['stringify'](C['piezas']);if(ultimasPiezas!==''&&ultimasPiezas!==l){document['getElementById']('sonidoPiezaMayor')?.['play']();document['getElementById']('panelPiezas')?.['classList']['add']('parpadeoPieza');setTimeout(()=>{document['getElementById']('panelPiezas')?.['classList']['remove']('parpadeoPieza');},0xfa0);}ultimasPiezas=l;}async function cargarResumen(){const D=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'resumen_admin'})});const C=await D['json']();if(!C['ok'])return;document['getElementById']('cardEquipos')['textContent']=C['embarcaciones'];document['getElementById']('cardCapturas')['textContent']=C['capturas'];document['getElementById']('cardEspecies')['textContent']=C['especies'];document['getElementById']('cardFiscales')['textContent']=C['fiscales'];document['getElementById']('cardMayor')['textContent']=C['mayor_pieza'];}async function loginAdmin(){try{const D=document['getElementById']('usuario')['value'];const C=document['getElementById']('clave')['value'];console['log']('Usuario:',D);console['log']('Clave:',C);const a=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'login','usuario':D,'clave':C})});const l=await a['json']();console['log']('Respuesta:',l);if(l['ok']&&l['rol']==='admin'){localStorage['setItem']('admin_login','SI');location['reload']();}else{alert('Acceso\x20denegado');}}catch(e){console['error']('ERROR\x20LOGIN:',e);}}if(localStorage['getItem']('admin_login')==='SI'){document['getElementById']('loginBox')['style']['display']='none';}else{document['getElementById']('loginBox')['style']['display']='flex';}function salirAdmin(){if(confirm('¿Cerrar\x20sesión\x20del\x20administrador?')){localStorage['removeItem']('admin_login');location['reload']();}}
-
-</script>
-</div>
 </body>
 </html>

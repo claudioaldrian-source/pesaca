@@ -3,913 +3,97 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Pesca Variada JAAUKANIGAS - Fiscal</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>En Mantenimiento</title>
 
 <style>
-
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
-    font-family:'Inter',sans-serif;
-    background:#edf1f5;
-    color:#111827;
-}
-
-/* ================= HEADER ================= */
-
-.header{
-    position:sticky;
-    top:0;
-    z-index:999;
-    background:white;
-    box-shadow:0 2px 10px rgba(0,0,0,0.08);
-    border-bottom:3px solid #dc2626;
-}
-
-.top-header{
-    display:grid;
-    grid-template-columns:1fr auto 1fr;
+    background:#0d1117;
+    color:#fff;
+    height:100vh;
+    display:flex;
+    justify-content:center;
     align-items:center;
-    gap:10px;
-    padding:10px;
-}
-
-.box{
-    background:#f3f4f6;
-    border-radius:10px;
-    padding:8px;
     text-align:center;
+    padding:20px;
 }
 
-.box-title{
-    font-size:10px;
-    font-weight:700;
-    color:#6b7280;
-}
-
-.box-value{
-    font-size:20px;
-    font-weight:700;
+.card{
+    max-width:700px;
+    background:#161b22;
+    border:2px solid #1f6feb;
+    border-radius:20px;
+    padding:40px;
+    box-shadow:0 0 30px rgba(31,111,235,.35);
 }
 
 .logo{
-    text-align:center;
+    font-size:70px;
+    margin-bottom:20px;
+    animation:pulse 2s infinite;
 }
 
-.logo img{
-    width:45px;
+h1{
+    font-size:38px;
+    margin-bottom:20px;
+    color:#58a6ff;
 }
 
-.logo-text{
-    font-size:11px;
-    font-weight:700;
-}
-
-/* ================= CONTENIDO ================= */
-
-.container{
-    padding:8px;
-}
-
-/* ================= LISTAS ================= */
-
-.listas{
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr;
-    gap:7px;
-}
-
-.lista{
-    background:white;
-    border-radius:14px;
-    overflow:hidden;
-    box-shadow:0 3px 10px rgba(0,0,0,0.05);
-}
-
-/* ================= ITEM ================= */
-
-.item{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:4px 6px;
-    border-bottom:1px solid green;
-    min-height:30px;
-    cursor:pointer;
-    transition:0.15s;
-    user-select:none;
-}
-
-.item:last-child{
-    border-bottom:none;
-}
-
-.item:hover{
-    background:#f9fafb;
-}
-
-.item.bloqueado:hover{
-    background:white;
-    cursor: not-allowed;
-}
-
-.item-name{
-    font-size:15px;
-    font-weight:500;
-    flex:1;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    background:yellow;
-    border-radius:4px;
-    padding:4px 4px;
-}
-
-/* ================= ESTADOS ================= */
-
-.estado{
-    min-width:30px;
-    text-align:right;
-    font-size:15px;
-    font-weight:700;
-}
-
-.item.estado0{
-    background:white;
-    color:black;
-}
-
-.item.estado1{
-    background:#dcfce7;
-}
-
-.item.estado1 .estado{
-    color:#15803d;
-}
-
-.item.estado2{
-    background:#dbeafe;
-}
-
-.item.estado2 .estado{
-    color:#1d4ed8;
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width:700px){
-
-    .listas{
-        gap:6px;
-    }
-
-    .item{
-        padding:4px 6px;
-        min-height:42px;
-    }
-
-    .item-name{
-        font-size:12px;
-    }
-
-    .estado{
-        font-size:11px;
-        min-width:28px;
-    }
-
-}
-
-/* ================= FOOTER ================= */
-
-.footer-space{
-    height:0px;
-}
-
-/* ================= TICKER ================= */
-
-.ticker-wrap{
-    width:100%;
-    overflow:hidden;
-    background:#111827;
-    margin:10px 0;
-    border-top:2px solid #16a34a;
-    border-bottom:2px solid #16a34a;
-}
-
-.ticker{
-    white-space:nowrap;
-    color:#dcfce7;
-    font-size:13px;
-    font-weight:700;
-    padding:8px 0;
-    display:inline-block;
-    animation:tickerMove 18s linear infinite;
-}
-
-/* ANIMACION */
-
-@keyframes tickerMove{
-
-    from{
-        transform:translateX(100%);
-    }
-
-    to{
-        transform:translateX(-100%);
-    }
-
-}
-
-/* ================= PIEZAS MAYORES ================= */
-
-.mayores-box{
-    margin-top:10px;
-    background:#FCC6BB;
-    border-radius:14px;
-    padding:10px;
-    box-shadow:0 3px 10px rgba(0,0,0,0.05);
-}
-
-.mayores-title{
-    font-size:15px;
-    font-weight:700;
-    color:blue;
-}
-
-.mayores-sub{
-    font-size:15px;
-    color:blue;
-    margin-bottom:0px;
-}
-
-.mayor-row{
-    display:grid;
-    grid-template-columns:140px auto;
-    gap:2px;
-    align-items:center;
-    margin-bottom:6px;
-}
-
-.mayor-row:last-child{
-    margin-bottom:0;
-}
-
-.mayor-name{
-    font-size:15px;
-    font-weight:600;
-    color:black;
-}
-
-.mayor-cm{
-    height:32px;
-    border:none;
-    border-radius:8px;
-    background:white;
-    text-align:center;
-    font-size:12px;
-    font-weight:700;
-}
-
-.mayor-cm:focus{
-    outline:none;
-    box-shadow:0 0 0 2px rgba(251,191,36,0.3);
-}
-
-.mayor-cm:disabled {
-    background: #e5e7eb;
-    color: #9ca3af;
-    cursor: not-allowed;
-    opacity: 0.5;
-}
-
-/* ================= HEADER NUEVO ================= */
-
-.header{
-    position:sticky;
-    top:0;
-    z-index:999;
-    background:white;
-    box-shadow:0 2px 10px rgba(0,0,0,0.08);
-    border-bottom:3px solid #dc2626;
-}
-
-.header-equipo{
-    padding:8px;
-}
-
-.header-row{
-    display:flex;
-    gap:6px;
-    margin-bottom:5px;
-    align-items:stretch;
-    flex-wrap:nowwrap;
-}
-
-.header-row:last-child{
-    margin-bottom:0;
-}
-
-.mini-box{
-    background:#f3f4f6;
-    border-radius:10px;
-    padding:5px 8px;
-}
-
-.emb-box{
-    width:70px;
-    text-align:center;
-    background:#BDC2CB;
-    color:white;
-}
-
-.jaauka-box{
-    flex:1;
-    background:red;
-    color:black;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-}
-
-.peña-box{
-    flex:1;
-    background:#D1D5DC;
-    color:blue;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-}
-
-/* ================= DIGITAL ================= */
-
-.digital-btn{
-    background:white;
-    color:#111827;
-    border:none;
-    border-radius:10px;
-    width:100%;
-    min-width:0;
-    box-sizing:border-box;
-    height:auto;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:0px;
-    cursor:pointer;
-    box-shadow:2px 2px 5px rgba(0,0,0,0.15);
-    padding:2px 4px;
-    transition: all 0.3s ease;
-}
-
-.digital-btn.activado {
-    background: #16a34a;
-    color: white;
-    box-shadow: 0 0 15px rgba(22, 163, 74, 0.5);
-}
-
-.digital-btn.activado .digital-bottom {
-    color: white;
-}
-
-/* TEXTO SUPERIOR */
-
-.digital-top{
-    font-size:12px;
-    font-weight:700;
-    color:black;
-    line-height:1;
-}
-
-.digital-btn.activado .digital-top {
-    color: white;
-}
-
-/* TEXTO INFERIOR */
-
-.digital-bottom{
-    font-size:13px;
-    font-weight:800;
-}
-
-.mayores-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:8px;
-}
-
-/* ================= SYNC ================= */
-
-.sync-box{
-    width:72px;
-    background:#f3f4f6;
-    border-radius:10px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    padding:4px;
-}
-
-.sync-logo{
-    width:60px;
-    object-fit:contain;
-}
-
-.logo-vari{
-    width:40px;
-    height:50px;
-    object-fit:contain;
-}
-
-.sync-text{
-    font-size:8px;
-    font-weight:700;
-    color:#6b7280;
-}
-
-.mini-label{
-    font-size:13px;
-    font-weight:700;
-    opacity:0.9;
-    text-align:center;
-    color:red;
-}
-
-.mini-value{
+p{
     font-size:20px;
-    font-weight:700;
-    color:white;
+    line-height:1.6;
+    color:#c9d1d9;
 }
 
-.mini-text{
-    font-size:15px;
-    font-weight:700;
-    color:green;
-    text-align:center;
-}
-
-.info-line{    
-    background:#f3f4f6;
-    border-radius:8px;
-    padding:6px 8px;
-    font-size:12px;
-    text-align:center;
-flex:1;
-}
-
-.info-label{
-    font-weight:700;
-    color:#374151;
-}
-
-.fiscal-zona{
-    background:#bfefff !important;
-    border:1px solid #7dcfff;
-    border-radius:12px;
-    padding:6px 12px;
-    font-size:12px;
-    font-weight:700;
-    cursor:pointer;
-    box-shadow:0 2px 4px rgba(0,0,0,.15);
-}
-
-
-/* ================= RESUMEN ================= */
-
-.resumen{
-    display:grid;
-    grid-template-columns:1fr 1fr 1fr 1.6fr;
-    gap:5px;
-    padding:2px 10px;
-    background:#111827;
-}
-
-.resumen-card{
-    background:#BBF451;
-    color:black;
-    border-radius:8px;
-    text-align:center;
-    padding:2px 4px;
-    min-height:25px;
-box-sizing:border-box;
-    overflow:hidden;
-}
-
-.resumen-inline{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:0;
-}
-
-.resumen-num{
+.aviso{
+    margin-top:30px;
     font-size:18px;
-    font-weight:700;
-line-height:1;
+    color:#ffd33d;
+    animation:blink 1s infinite;
 }
 
-.resumen-label{
-    font-size:11px;
-    color:black;
-font-weight:600;
-line-height:1;
+@keyframes pulse{
+    50%{
+        transform:scale(1.1);
+    }
 }
 
-.mini-input{
-    width:100%;
-    border:none;
-    background:transparent;
-    font-size:12px;
-    font-weight:700;
-    color:white;
-    text-align:center;
+@keyframes blink{
+    50%{
+        opacity:.3;
+    }
 }
-
-.mini-input:focus{
-    outline:none;
-}
-
-.emb-input{
-    width:100%;
-    border:none;
-    text-align:center;
-    font-size:15px;
-    font-weight:800;
-    color:green;
-}
-
-.emb-input:focus{
-    outline:none;
-}
-
-.mini-input::placeholder{
-    color:white;
-}
-
-.mediciones{
-    display:flex;
-    gap:6px;
-}
-
-.med-btn{
-    border:none;
-    background:white;
-    border-radius:8px;
-    min-width:52px;
-    height:34px;
-    font-size:15px;
-    font-weight:700;
-    cursor:pointer;
-    transition: all 0.2s ease;
-}
-
-.med-btn:disabled {
-    background: #e5e7eb;
-    color: #9ca3af;
-    cursor: not-allowed;
-    opacity: 0.5;
-}
-
-.med-ok{
-    background:#16a34a !important;
-    color:black !important;
-}
-
-.login-equipo{
-
-    position:fixed;
-    inset:0;
-
-    background:#edf1f5;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    z-index:99999;
-
-}
-
-.login-card{
-
-    background:white;
-
-    padding:25px;
-
-    border-radius:16px;
-
-    width:300px;
-
-    text-align:center;
-
-    box-shadow:0 5px 20px rgba(0,0,0,.15);
-
-}
-
-.login-card input{
-
-    width:100%;
-
-    height:50px;
-
-    margin:15px 0;
-
-    text-align:center;
-
-    font-size:22px;
-
-    border:1px solid #d1d5db;
-
-    border-radius:10px;
-
-}
-
-.login-card button{
-    width:100%;
-    height:48px;
-    border:none;
-    border-radius:10px;
-    background:#16a34a;
-    color:white;
-    font-weight:700;
-    cursor:pointer;
-}
-
-.fiscal-zona{
-    background:#bfefff !important;
-}
-
-.logout-btn{
-    background:#2196f3;
-    color:white;
-    border:none;
-    border-radius:12px;
-    padding:6px 12px;
-    font-size:12px;
-    font-weight:700;
-    cursor:pointer;
-    box-shadow:0 2px 5px rgba(0,0,0,.20);
-}
-
-/* LOGOS LOGIN */
-
-.login-logos{
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:15px;
-    margin-bottom:10px;
-}
-
-.logo-pesca{
-    width:50px;
-}
-
-.logo-macla{
-    width:100px;
-}
-
 </style>
 </head>
 
 <body>
 
-<div id="loginEquipo" class="login-equipo">
-    <div class="login-card">
+<div class="card">
 
-<div class="login-logos">
+    <div class="logo">🚧</div>
 
-    <img src="logo-vari.png" class="logo-pesca">
-<img src="logo-macla.png" class="logo-macla">
+    <h1>Página FISCAL en Reforma</h1>
 
-</div>
-        <h2>CONCURSO DE PESCA VARIADA</h2>
-        <h3>JAAUKANIGAS</h3>
-        <input
-id="usuarioFiscal"
-type="text"
-placeholder="Usuario Fiscal">
+    <p>
+        El sistema FISCAL del Concurso de Pesca Variada JAAUKANIGAS
+        se encuentra en mantenimiento y actualización.
+    </p>
 
- <input
-   id="claveFiscal"
-   type="password"
-   placeholder="Clave">
-   <button onclick="ingresarFiscal()">
-    INGRESAR
- </button>
-    </div>
-</div>
+    <p style="margin-top:15px;">
+        Disculpe las molestias.
+    </p>
 
-<div id="contenidoApp" style="display:none;">
-
-<!-- ================= HEADER ================= -->
-
-<div class="header">
-
-    <!-- DATOS EQUIPOS -->
-
-    <div class="header-equipo">
-
-<div class="header-row">
-
-    <div class="info-line fiscal-zona">
-        <span class="info-label">
-            👮 FISCAL Nº:
-        </span>
-        <span id="datoFiscal">
-            -
-        </span>
-    </div>
-
-    <div class="info-line fiscal-zona">
-        <span class="info-label">
-            ZONA:
-        </span>
-        <span id="datoZona"> 
-       -
-     </span>
-    </div>
-
-<button class="logout-btn"
-onclick="cerrarSesionFiscal()">
-🚪 Cerrar sesión
-</button>
-
-</div>
-
-
-        <div class="header-row">
-
-            <!-- LOGO PESCA -->
-            <img src="logo-vari.png"
-                class="logo-vari">
-
-            <!-- TITULO -->
-            <div class="mini-box peña-box">
-                <div class="mini-label">
-                    CONCURSO DE PESCA VARIADA
-                </div>
-                <div class="mini-text">
-                    JAAUKANIGAS
-                </div>
-            </div>
-
- <!-- EQUIPO -->
-      <div class="mini-box emb-box">
-         <div class="mini-label">
-          EQUIPO nº
-        </div>
-
-    <input
-    id="embNumero"
-    class="emb-input"
-    placeholder="00">   
-</div>   
-
-             
-
-<button
-class="digital-btn"
-onclick="nuevaEmbarcacion()">
-
-    <span class="digital-top">
-        NUEVO
-    </span>
-
-    <span class="digital-bottom">
-        🚤EQUIPO
-    </span>
-</button>
-                
-</div>
-
-<div class="header-row">
-
-    <div class="info-line">
-        <span class="info-label">TIMONEL:</span>
-        <span id="datoTimonel"></span>
-    </div>
-
-    <div class="info-line">
-        <span class="info-label">CATEGORÍA:</span>
-        <span id="datoCategoria"></span>
+    <div class="aviso">
+        ⚠️ Plataforma temporalmente fuera de servicio ⚠️
     </div>
 
 </div>
 
-<div class="header-row">
-
-    <div class="info-line">
-        <span class="info-label">PESCADORES/AS:</span>
-        <span id="datoPescadores"></span>
-    </div>
-
-    <div class="info-line">
-        <span class="info-label">PEÑA:</span>
-        <span id="embPeña"></span>
-    </div>
-
-     </div>   
-
-<!-- RESUMEN -->
-    <div class="resumen">
-
-<div class="resumen-card">
-            <div class="resumen-inline">
-                <span class="resumen-num"
-                id="cantPuntos">0</span>
-                <span class="resumen-label">PUNTOS</span>
-            </div>
-        </div>      
-
-        <div class="resumen-card">
-            <div class="resumen-inline">
-                <span class="resumen-num"
-                id="cantCapturas">0</span>
-                <span class="resumen-label">CAPTURAS</span>
-            </div>            
-        </div>
-
-<div class="resumen-card">
-            <div class="resumen-inline">
-                <span class="resumen-num"
-                id="cantEspecies">0</span>
-                <span class="resumen-label">ESPECIES</span>
-            </div>        
-        </div>
-<!-- DIGITAL BUTTON -->
-            <button class="digital-btn" id="btnActivar" onclick="toggleActivacion()">
-
-<span class="digital-bottom" id="btnEstado">
-                    📲 ACTIVAR
-                </span>
-                <span class="digital-top">
-                    GUARDAR CAPT.
-                </span>               
-             </button>     
-    </div>
-</div>
-      
-</div>   
-
-<!-- ================= LISTAS ================= -->
-
-<div class="container">
-
-    <div class="listas">
-        <div class="lista" id="lista1"></div>
-        <div class="lista" id="lista2"></div>
-        <div class="lista" id="lista3"></div>
-    </div>
-
-</div>
-
-<!-- ========= BANNER MACLA ======== -->
-<div class="ticker-wrap">
-
-    <div class="ticker">
-        ⚡ Concurso de pesca Variada JAAUKANIGAS •
-        Sincronizado por MACLA IA •
-        Claudio Aldrian •
-        Fiscalización Digital Inteligente •       
-    </div>
-
-</div>
-
-
-<!-- ================= PIEZAS MAYORES ================= -->
-
-<div class="mayores-box">
-
-    <div class="mayores-header">
-        <div class="mayores-title">
-            ⭐ PIEZAS MAYORES
-        </div>
-        <div class="mayores-sub">
-            Registrar medidas oficiales
-        </div>
-    </div>
-
-    <div id="mayores-list"></div>
-
-</div>   
-      
-     
-<script>
-
-let capturasPendientes=JSON['parse'](localStorage['getItem']('capturasPendientes'))||[];const SHEET_URL='https://script.google.com/macros/s/AKfycbyayWhy6qryKf4_iMhRy2VNmR9LQMz4bxj1PfAFuAgrwv9l6D_mncB29-wq1n0sht-T/exec';let planillaActivada=![];async function toggleActivacion(){if(planillaActivada){const z={};document['querySelectorAll']('.item')['forEach'](Y=>{const j=Y['querySelector']('.item-name')['textContent']['trim']();z[j]=Number(Y['dataset']['estado']);});const q={'armadogallego':[document['querySelectorAll']('.mayor-row')[0x0]['querySelectorAll']('.med-btn')[0x0]['innerText'],document['querySelectorAll']('.mayor-row')[0x0]['querySelectorAll']('.med-btn')[0x1]['innerText'],document['querySelectorAll']('.mayor-row')[0x0]['querySelectorAll']('.med-btn')[0x2]['innerText']],'pati':[document['querySelectorAll']('.mayor-row')[0x1]['querySelectorAll']('.med-btn')[0x0]['innerText'],document['querySelectorAll']('.mayor-row')[0x1]['querySelectorAll']('.med-btn')[0x1]['innerText'],document['querySelectorAll']('.mayor-row')[0x1]['querySelectorAll']('.med-btn')[0x2]['innerText']],'surubi_pinta':[document['querySelectorAll']('.mayor-row')[0x2]['querySelectorAll']('.med-btn')[0x0]['innerText'],document['querySelectorAll']('.mayor-row')[0x2]['querySelectorAll']('.med-btn')[0x1]['innerText'],document['querySelectorAll']('.mayor-row')[0x2]['querySelectorAll']('.med-btn')[0x2]['innerText']],'mandube_cuch':[document['querySelectorAll']('.mayor-row')[0x3]['querySelectorAll']('.med-btn')[0x0]['innerText'],document['querySelectorAll']('.mayor-row')[0x3]['querySelectorAll']('.med-btn')[0x1]['innerText'],document['querySelectorAll']('.mayor-row')[0x3]['querySelectorAll']('.med-btn')[0x2]['innerText']],'moncholo':[document['querySelectorAll']('.mayor-row')[0x4]['querySelectorAll']('.med-btn')[0x0]['innerText'],document['querySelectorAll']('.mayor-row')[0x4]['querySelectorAll']('.med-btn')[0x1]['innerText'],document['querySelectorAll']('.mayor-row')[0x4]['querySelectorAll']('.med-btn')[0x2]['innerText']]};const g=JSON['stringify']({'capturas':z,'mayores':q});console['log']('JSON:',g);alert('ENVIANDO');if(!navigator['onLine']){guardarPendiente({'tipo':'guardar_captura','num_equipo':document['getElementById']('embNumero')['value'],'categoria':document['getElementById']('datoCategoria')['innerText'],'peña':document['getElementById']('embPeña')['textContent'],'pescadores':document['getElementById']('datoPescadores')['innerText'],'puntos':document['getElementById']('cantPuntos')['innerText'],'total_capturas':document['getElementById']('cantCapturas')['innerText'],'total_especies':document['getElementById']('cantEspecies')['innerText'],'fiscal':localStorage['getItem']('numFiscal'),'armado_gallego':Array['from'](document['querySelectorAll']('.mayor-row')[0x0]['querySelectorAll']('.med-btn'))['map'](Y=>Y['innerText'])['join']('\x20/\x20'),'pati':Array['from'](document['querySelectorAll']('.mayor-row')[0x1]['querySelectorAll']('.med-btn'))['map'](Y=>Y['innerText'])['join']('\x20/\x20'),'surubi_pinta':Array['from'](document['querySelectorAll']('.mayor-row')[0x2]['querySelectorAll']('.med-btn'))['map'](Y=>Y['innerText'])['join']('\x20/\x20'),'mandube_cuch':Array['from'](document['querySelectorAll']('.mayor-row')[0x3]['querySelectorAll']('.med-btn'))['map'](Y=>Y['innerText'])['join']('\x20/\x20'),'moncholo':Array['from'](document['querySelectorAll']('.mayor-row')[0x4]['querySelectorAll']('.med-btn'))['map'](Y=>Y['innerText'])['join']('\x20/\x20'),'estado_json':g});planillaActivada=![];document['getElementById']('btnActivar')['classList']['remove']('activado');document['getElementById']('btnEstado')['textContent']='📲\x20ACTIVAR';bloquearPlanilla();alert('📴\x20Sin\x20internet.\x0aCaptura\x20guardada\x20en\x20el\x20celular.');return;}await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'guardar_captura','num_equipo':document['getElementById']('embNumero')['value'],'categoria':document['getElementById']('datoCategoria')['innerText'],'peña':document['getElementById']('embPeña')['textContent'],'pescadores':document['getElementById']('datoPescadores')['innerText'],'puntos':document['getElementById']('cantPuntos')['innerText'],'total_capturas':document['getElementById']('cantCapturas')['innerText'],'total_especies':document['getElementById']('cantEspecies')['innerText'],'fiscal':localStorage['getItem']('numFiscal'),'armado_gallego':Array['from'](document['querySelectorAll']('.mayor-row')[0x0]['querySelectorAll']('.med-btn'))['map'](Y=>Y['innerText'])['join']('\x20/\x20'),'pati':Array['from'](document['querySelectorAll']('.mayor-row')[0x1]['querySelectorAll']('.med-btn'))['map'](Y=>Y['innerText'])['join']('\x20/\x20'),'surubi_pinta':Array['from'](document['querySelectorAll']('.mayor-row')[0x2]['querySelectorAll']('.med-btn'))['map'](Y=>Y['innerText'])['join']('\x20/\x20'),'mandube_cuch':Array['from'](document['querySelectorAll']('.mayor-row')[0x3]['querySelectorAll']('.med-btn'))['map'](Y=>Y['innerText'])['join']('\x20/\x20'),'moncholo':Array['from'](document['querySelectorAll']('.mayor-row')[0x4]['querySelectorAll']('.med-btn'))['map'](Y=>Y['innerText'])['join']('\x20/\x20'),'estado_json':g})});await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'guardar_pieza_mayor','orden':'','num_equipo':document['getElementById']('embNumero')['value'],'categoria':document['getElementById']('datoCategoria')['innerText'],'peña':document['getElementById']('embPeña')['textContent'],'pescadores':document['getElementById']('datoPescadores')['innerText'],'armado_gallego':document['querySelectorAll']('.mayor-row')[0x0]['querySelector']('.med-ok')?.['innerText']||'','pati':document['querySelectorAll']('.mayor-row')[0x1]['querySelector']('.med-ok')?.['innerText']||'','surubi_pinta':document['querySelectorAll']('.mayor-row')[0x2]['querySelector']('.med-ok')?.['innerText']||'','mandube_cuch':document['querySelectorAll']('.mayor-row')[0x3]['querySelector']('.med-ok')?.['innerText']||'','moncholo':document['querySelectorAll']('.mayor-row')[0x4]['querySelector']('.med-ok')?.['innerText']||'','fiscal':localStorage['getItem']('numFiscal')})});planillaActivada=![];document['getElementById']('btnActivar')['classList']['remove']('activado');document['getElementById']('btnEstado')['textContent']='📲\x20ACTIVAR';bloquearPlanilla();alert('Captura\x20guardada');return;}const W=prompt('Ingrese\x20clave\x20fiscal');if(!W)return;const R=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'validar_clave','clave':W})});const Q=await R['json']();if(!Q['ok']){alert('Clave\x20incorrecta');return;}planillaActivada=!![];document['getElementById']('btnActivar')['classList']['add']('activado');document['getElementById']('btnEstado')['textContent']='✅\x20ACTIVADA';desbloquearPlanilla();}function bloquearPlanilla(){document['querySelectorAll']('.item')['forEach'](W=>{W['classList']['add']('bloqueado');W['onclick']=null;});document['querySelectorAll']('.med-btn')['forEach'](W=>{W['disabled']=!![];});document['querySelectorAll']('.mayor-cm')['forEach'](W=>{W['disabled']=!![];});}function desbloquearPlanilla(){document['querySelectorAll']('.item')['forEach'](W=>{W['classList']['remove']('bloqueado');const R=W['querySelector']('.item-name')['textContent'];W['onclick']=function(){cambiarEstadoItem(W);};});document['querySelectorAll']('.med-btn')['forEach'](W=>{W['disabled']=![];});document['querySelectorAll']('.mayor-cm')['forEach'](W=>{W['disabled']=![];});}function cambiarEstadoItem(W){if(!planillaActivada)return;let R=Number(W['dataset']['estado']);R++;if(R>0x2){R=0x0;}W['dataset']['estado']=R;W['classList']['remove']('estado0','estado1','estado2');W['classList']['add']('estado'+R);const Q=W['querySelector']('.estado');if(R==0x0){Q['innerHTML']='—';}else if(R==0x1){Q['innerHTML']='1ª';}else{Q['innerHTML']='1ª\x202ª';}actualizarResumen();}const especies=['AMARILLO','APRETADOR','ARM.CHAN','ARM.GALL','AZULINO','BAG.CHA','BAG.COR','BOGA','BRILLANTE','CORVINA\x20RIO','DENTUDO','MAN.REAL','MAN.CUC','MAN.EST','MARI.COM','MARI.RAY','MONCH.BL.','OJON-PORT.','PAL.MORA','PIRAÑA','PICUDO','PATI\x20FALSO','PIRÁYAGUÁ','RAYA','SALMON\x20RÍO','SURU.ATI','SURU.PIN','TAPE'];const porColumna=Math['ceil'](especies['length']/0x3);const lista1=especies['slice'](0x0,porColumna);const lista2=especies['slice'](porColumna,porColumna*0x2);const lista3=especies['slice'](porColumna*0x2);renderLista(lista1,'lista1');renderLista(lista2,'lista2');renderLista(lista3,'lista3');function renderLista(W,R){const Q=document['getElementById'](R);W['forEach'](z=>{const q=document['createElement']('div');q['className']='item\x20estado0\x20bloqueado';q['dataset']['estado']=0x0;q['innerHTML']='\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22item-name\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+z+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22estado\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20—\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20';Q['appendChild'](q);});}function actualizarResumen(){let W=0x0;let R=0x0;let Q=0x0;document['querySelectorAll']('.item')['forEach'](z=>{const q=Number(z['dataset']['estado']);if(q>0x0){W++;}if(q==0x1){R+=0x1;Q+=0xc8;}if(q==0x2){R+=0x2;Q+=0xd2;}});document['getElementById']('cantEspecies')['innerText']=W;document['getElementById']('cantCapturas')['innerText']=R;document['getElementById']('cantPuntos')['innerText']=Q;}const especiesMayores=['Armado\x20Gallego','Patí','Surubí\x20Pinta','Mandubé\x20Cuchara','Moncholo'];const mayoresList=document['getElementById']('mayores-list');especiesMayores['forEach'](W=>{mayoresList['innerHTML']+='\x0a\x20\x20\x20\x20<div\x20class=\x22mayor-row\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22mayor-name\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20'+W+'\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20<div\x20class=\x22mediciones\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22med-btn\x22\x20disabled\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20onclick=\x22cargarMedida(this)\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x201ª\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22med-btn\x22\x20disabled\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20onclick=\x22cargarMedida(this)\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x202ª\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<button\x20class=\x22med-btn\x22\x20disabled\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20onclick=\x22cargarMedida(this)\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x203ª\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</button>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20';});function cargarMedida(W){if(!planillaActivada)return;const R=prompt('Ingresar\x20medida\x20en\x20cm');if(R&&R!==''){W['innerText']=R+'\x20cm';W['classList']['add']('med-ok');}}function ingresarEquipo(){const W=document['getElementById']('numeroEquipo')['value'];if(!W){alert('Ingrese\x20número\x20de\x20embarcación');return;}cargarEquipo(W);}async function ingresarFiscal(){const W=document['getElementById']('usuarioFiscal')['value'];const R=document['getElementById']('claveFiscal')['value'];if(!W||!R){alert('Complete\x20usuario\x20y\x20clave');return;}const Q=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'validar_fiscal','usuario':W,'clave':R})});const z=await Q['json']();if(!z['ok']){alert('Usuario\x20o\x20clave\x20incorrectos');return;}localStorage['setItem']('fiscalLogueado',z['fiscal']);localStorage['setItem']('numFiscal',z['numFiscal']);localStorage['setItem']('zonaFiscal',z['zona']);alert('Bienvenido\x20'+z['fiscal']);document['getElementById']('loginEquipo')['style']['display']='none';document['getElementById']('contenidoApp')['style']['display']='block';document['getElementById']('datoFiscal')['innerText']=z['numFiscal'];document['getElementById']('datoZona')['innerText']=z['zona'];}async function cargarEquipo(W){limpiarPlanilla();try{const R=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'obtener_equipo','numero':W})});const Q=await R['json']();if(!Q['ok']){alert('Equipo\x20no\x20encontrado');return;}const z=Q['equipo'];localStorage['setItem']('equipoLogueado',z['numero']);document['getElementById']('loginEquipo')['style']['display']='none';document['getElementById']('contenidoApp')['style']['display']='block';document['getElementById']('embNumero')['value']=z['numero'];document['getElementById']('embPeña')['textContent']=z['peña'];document['getElementById']('datoTimonel')['innerText']=z['timonel'];document['getElementById']('datoCategoria')['innerText']=z['categoria'];document['getElementById']('datoPescadores')['innerText']=[z['pescador1'],z['pescador2'],z['pescador3'],z['pescador4']]['filter'](Boolean)['join']('\x20/\x20');await cargarUltimaCaptura(W);}catch(q){console['error'](q);alert('Error\x20conectando\x20con\x20servidor');}}window['onload']=function(){const W=localStorage['getItem']('fiscalLogueado');const R=localStorage['getItem']('numFiscal');const Q=localStorage['getItem']('zonaFiscal');if(W){document['getElementById']('loginEquipo')['style']['display']='none';document['getElementById']('contenidoApp')['style']['display']='block';document['getElementById']('datoFiscal')['innerText']=R;document['getElementById']('datoZona')['innerText']=Q||'';}localStorage['removeItem']('equipoLogueado');if(navigator['onLine']){sincronizarPendientes();}};async function cargarUltimaCaptura(W){const R=await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify']({'tipo':'obtener_ultima_captura','numero':W})});const Q=await R['json']();if(!Q['ok'])return;const z=JSON['parse'](Q['estado_json']);const q=z['capturas'];const g=z['mayores']||{};document['querySelectorAll']('.item')['forEach'](j=>{const x=j['querySelector']('.item-name')['textContent']['trim']();const B=q[x]||0x0;j['dataset']['estado']=B;j['classList']['remove']('estado0','estado1','estado2');j['classList']['add']('estado'+B);const f=j['querySelector']('.estado');if(B==0x0)f['innerHTML']='—';if(B==0x1)f['innerHTML']='1ª';if(B==0x2)f['innerHTML']='1ª\x202ª';});actualizarResumen();const Y=['armadogallego','pati','surubi_pinta','mandube_cuch','moncholo'];Y['forEach']((j,x)=>{if(!g[j])return;const B=document['querySelectorAll']('.mayor-row')[x]['querySelectorAll']('.med-btn');g[j]['forEach']((f,h)=>{if(f&&f!=='1ª'&&f!=='2ª'&&f!=='3ª'){B[h]['innerText']=f;B[h]['classList']['add']('med-ok');}});});}async function nuevaEmbarcacion(){const W=prompt('Ingrese\x20N°\x20de\x20Equipo');if(!W)return;cargarEquipo(W);}function cerrarSesionFiscal(){localStorage['removeItem']('fiscalLogueado');localStorage['removeItem']('zonaFiscal');document['getElementById']('contenidoApp')['style']['display']='none';document['getElementById']('loginEquipo')['style']['display']='block';document['getElementById']('usuarioFiscal')['value']='';document['getElementById']('claveFiscal')['value']='';}function limpiarPlanilla(){document['querySelectorAll']('.item')['forEach'](W=>{W['dataset']['estado']=0x0;W['classList']['remove']('estado0','estado1','estado2');W['classList']['add']('estado0');W['querySelector']('.estado')['innerHTML']='—';});document['querySelectorAll']('.med-btn')['forEach'](W=>{W['innerText']='1ª';if(W['parentElement']['children'][0x1]===W)W['innerText']='2ª';if(W['parentElement']['children'][0x2]===W)W['innerText']='3ª';W['classList']['remove']('med-ok');});document['getElementById']('cantEspecies')['innerText']='0';document['getElementById']('cantCapturas')['innerText']='0';document['getElementById']('cantPuntos')['innerText']='0';}function guardarPendiente(W){capturasPendientes['push'](W);localStorage['setItem']('capturasPendientes',JSON['stringify'](capturasPendientes));}async function sincronizarPendientes(){const W=JSON['parse'](localStorage['getItem']('capturasPendientes'))||[];if(!W['length'])return;for(const R of W){try{await fetch(SHEET_URL,{'method':'POST','body':JSON['stringify'](R)});}catch(Q){return;}}localStorage['removeItem']('capturasPendientes');capturasPendientes=[];alert('✅\x20Capturas\x20sincronizadas.');}window['addEventListener']('online',sincronizarPendientes);
-
-</script>
-</div>
 </body>
 </html>
